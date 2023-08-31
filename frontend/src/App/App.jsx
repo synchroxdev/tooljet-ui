@@ -428,7 +428,7 @@ class AppComponent extends React.Component {
               />
               <Route
                 exact
-                path="/:workspaceId/global-datasources"
+                path="/:workspaceId/data-sources"
                 element={
                   <PrivateRoute>
                     <GlobalDatasources

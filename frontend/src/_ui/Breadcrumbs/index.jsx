@@ -13,11 +13,23 @@ export const Breadcrumbs = ({ darkMode, dataCy }) => {
       {breadcrumbs.map(({ breadcrumb, beta }, i) => {
         if (i == 1 || breadcrumbs?.length == 1) {
           return (
-            <div key={breadcrumb.key} className="tj-dashboard-header-title-wrap" data-cy={dataCy ?? ''}>
+            <div
+              key={breadcrumb.key}
+              className="tj-dashboard-header-title-wrap"
+              data-cy={dataCy ?? ''}
+            >
               <p className=" tj-text-xsm ">{breadcrumb}</p>
-              {sidebarNav?.length > 0 && <SolidIcon name="cheveronright" fill={darkMode ? '#FDFDFE' : '#131620'} />}
+              {sidebarNav?.length > 0 && (
+                <SolidIcon
+                  name="cheveronright"
+                  fill={darkMode ? '#FDFDFE' : '#131620'}
+                />
+              )}
               <li className="breadcrumb-item font-weight-500">
-                <Link to={breadcrumb.key} data-cy="breadcrumb-page-title">
+                <Link
+                  to={breadcrumb.key}
+                  data-cy="breadcrumb-page-title"
+                >
                   {' '}
                   {sidebarNav}
                 </Link>
@@ -35,6 +47,6 @@ const routes = [
   { path: '/:worspace_id', breadcrumb: 'Applications' },
   { path: '/:worspace_id/database', breadcrumb: 'Tables', props: { dataCy: 'tables-page-header' } },
   { path: '/workspace-settings', breadcrumb: 'Workspace settings' },
-  { path: '/global-datasources', breadcrumb: 'Global Datasources' },
+  { path: '/data-sources', breadcrumb: 'Data Sources' },
   { path: '/integrations', breadcrumb: 'Integrations / plugins', props: { beta: true } },
 ];

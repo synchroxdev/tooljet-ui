@@ -15,8 +15,8 @@ function Header() {
         return 'Database';
       case 'workspace-settings':
         return 'Workspace settings';
-      case 'global-datasources':
-        return 'Datasources';
+      case 'data-sources':
+        return 'Data Sources';
       case 'settings':
         return 'Profile settings';
       case 'integrations':
@@ -31,13 +31,19 @@ function Header() {
     <header className="layout-header">
       <div className="row w-100 gx-0">
         <div className="tj-dashboard-section-header">
-          <p className="tj-text-md font-weight-500" data-cy="dashboard-section-header">
+          <p
+            className="tj-text-md font-weight-500"
+            data-cy="dashboard-section-header"
+          >
             {routes(location?.pathname.split('/').pop())}
           </p>
         </div>
         <div className="col tj-dashboard-header-wrap">
           <div className="d-flex justify-content-sm-between">
-            <div className="app-header-label" data-cy="app-header-label">
+            <div
+              className="app-header-label"
+              data-cy="app-header-label"
+            >
               <Breadcrumbs darkMode={darkMode} />
             </div>
             <div

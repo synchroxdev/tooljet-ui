@@ -10,15 +10,21 @@ const AddGlobalDataSourceButton = () => {
   const { admin } = authenticationService.currentSessionValue;
   const handleAddClick = () =>
     admin
-      ? navigate(`/${workspaceId}/global-datasources`)
-      : toast.error("You don't have access to GDS, contact your workspace admin to add datasources");
+      ? navigate(`/${workspaceId}/data-sources`)
+      : toast.error("You don't have access to GDS, contact your workspace admin to add data sources");
   return (
     <button
       className={`col-auto d-flex align-items-center py-1 my-3 rounded add-gds-secondary-button`}
       onClick={handleAddClick}
     >
       <span className={`d-flex align-items-center`}>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -27,7 +33,7 @@ const AddGlobalDataSourceButton = () => {
           />
         </svg>
       </span>
-      <span className="query-manager-btn-name">Add new global datasource</span>
+      <span className="query-manager-btn-name">Add new data source</span>
     </button>
   );
 };

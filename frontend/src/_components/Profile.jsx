@@ -8,7 +8,7 @@ import { ToolTip } from '@/_components/ToolTip';
 import { getPrivateRoute } from '@/_helpers/routes';
 import SolidIcon from '@/_ui/Icon/SolidIcons';
 
-export const Profile = function Header({ darkMode }) {
+export const Profile = function Header({ darkMode, checkForUnsavedChanges }) {
   const currentSession = authenticationService.currentSessionValue;
   const [currentUser, setCurrentUser] = React.useState({
     first_name: currentSession?.current_user.first_name,
@@ -44,11 +44,15 @@ export const Profile = function Header({ darkMode }) {
       <div className={`profile-card card ${darkMode && 'dark-theme'}`}>
         <Link
           data-testid="settingsBtn"
+          onClick={(event) => checkForUnsavedChanges(getPrivateRoute('settings'), event)}
           to={getPrivateRoute('settings')}
           className="dropdown-item tj-text-xsm"
           data-cy="profile-link"
         >
-          <SolidIcon name="user" width="20" />
+          <SolidIcon
+            name="user"
+            width="20"
+          />
 
           <span>{t('header.profile', 'Profile')}</span>
         </Link>
@@ -60,7 +64,10 @@ export const Profile = function Header({ darkMode }) {
           className="dropdown-item text-danger tj-text-xsm"
           data-cy="logout-link"
         >
-          <SolidIcon name="logout" width="20" />
+          <SolidIcon
+            name="logout"
+            width="20"
+          />
 
           <span>{t('header.logout', 'Logout')}</span>
         </Link>
@@ -69,10 +76,18 @@ export const Profile = function Header({ darkMode }) {
   };
 
   return (
-    <OverlayTrigger trigger="click" placement={'right'} rootClose={true} overlay={getOverlay()}>
+    <OverlayTrigger
+      trigger="click"
+      placement={'right'}
+      rootClose={true}
+      overlay={getOverlay()}
+    >
       <div className="user-avatar-nav-item cursor-pointer">
         <ToolTip message="Profile">
-          <div className="d-xl-block" data-cy="profile-settings">
+          <div
+            className="d-xl-block"
+            data-cy="profile-settings"
+          >
             <Avatar
               avatarId={currentUser?.avatar_id}
               text={`${currentUser?.first_name ? currentUser?.first_name[0] : ''}${
