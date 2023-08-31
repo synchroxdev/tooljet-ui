@@ -2,6 +2,7 @@ import React from 'react';
 import { Code } from './Elements/Code';
 import { QuerySelector } from './QuerySelector';
 import { resolveReferences } from '@/_helpers/utils';
+import { IconPicker } from './Components/IconPicker';
 
 export function renderQuerySelector(component, dataQueries, eventOptionUpdated, eventName, eventMeta) {
   let definition = component.component.definition.events[eventName];
@@ -51,6 +52,21 @@ export function renderElement(
         if (resolvedValue?.value !== value) return;
       }
     }
+  }
+
+  if (componentConfig.properties?.[param]?.type === 'iconPicker') {
+    const props = {
+      component,
+      componentMeta,
+      paramUpdated,
+      dataQueries,
+      param,
+      paramType,
+      currentState,
+      components,
+      darkMode,
+    };
+    return <IconPicker {...props} />;
   }
 
   return (
