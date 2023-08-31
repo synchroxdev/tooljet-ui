@@ -14,6 +14,7 @@ import { DropDown } from './DropDown';
 import { FilePicker } from './FilePicker';
 import { Html } from '../Components/Html';
 import { Icon } from './Icon';
+import { IconButton } from './IconButton';
 import { IFrame } from '../Components/IFrame';
 import { Image } from '../Components/Image';
 import { Link } from './Link';
@@ -102,6 +103,7 @@ const MUIComponents = {
   TreeSelect,
   Link,
   Icon,
+  IconButton,
   Form,
   BoundedBox,
 };

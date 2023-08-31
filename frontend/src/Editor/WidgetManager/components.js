@@ -1,4 +1,5 @@
 import { widgets } from './widgetConfig';
+import { customWidgets } from './customWidgetConfig';
 
 const universalProps = {
   properties: {},
@@ -36,7 +37,7 @@ const combineProperties = (widget, universal, isArray = false) => {
   };
 };
 
-export const componentTypes = widgets.map((widget) => {
+export const componentTypes = [...widgets, ...customWidgets].map((widget) => {
   return {
     ...combineProperties(widget, universalProps),
     definition: combineProperties(widget.definition, universalProps.definition, true),
