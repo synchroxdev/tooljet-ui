@@ -99,7 +99,6 @@ export function Icon({ componentMeta, darkMode, ...restProps }) {
 
   function renderIconPicker() {
     const icon = component.component.definition.properties.icon;
-    console;
     // eslint-disable-next-line import/namespace
     const IconElement = config.UI_LIB === 'mui' ? IconsMUI[icon.value] : Icons[icon.value];
     return (

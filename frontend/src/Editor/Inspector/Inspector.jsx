@@ -528,8 +528,6 @@ const GetAccordion = React.memo(
 
       case 'Icon':
         return <Icon {...restProps} />;
-      // case 'IconButton':
-      //   return <IconButton {...restProps} />;
 
       case 'Form':
         return <Form {...restProps} />;
