@@ -20,9 +20,9 @@ export const customWidgets = [
           schema: { type: 'string' },
         },
       },
-      iconPosition: {
+      alignIcon: {
         type: 'select',
-        displayName: 'Icon Position',
+        displayName: 'Align Icon',
         options: [
           { name: 'Left', value: 'left' },
           { name: 'Center', value: 'middle' },
@@ -39,9 +39,9 @@ export const customWidgets = [
           schema: { type: 'string' },
         },
       },
-      textPosition: {
+      alignText: {
         type: 'select',
-        displayName: 'Text Position',
+        displayName: 'Align Text',
         options: [
           { name: 'Left', value: 'left' },
           { name: 'Center', value: 'middle' },
@@ -144,9 +144,9 @@ export const customWidgets = [
       },
       properties: {
         icon: { value: 'Home' },
-        iconPosition: { value: 'left' },
-        textPosition: { value: 'left' },
+        alignIcon: { value: 'left' },
         text: { value: `Button` },
+        alignText: { value: 'left' },
       },
       events: [],
       styles: {

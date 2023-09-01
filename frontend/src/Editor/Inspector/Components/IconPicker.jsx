@@ -8,8 +8,10 @@ import { VirtuosoGrid } from 'react-virtuoso';
 
 import config from 'config';
 import * as IconsMUI from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 export function IconPicker({ darkMode, ...restProps }) {
+  const { t } = useTranslation();
   const { component, paramUpdated } = restProps;
 
   const [searchText, setSearchText] = useState('');
@@ -90,7 +92,7 @@ export function IconPicker({ darkMode, ...restProps }) {
   return (
     <>
       <div className="mb-2 field">
-        <label className="form-label">Icon</label>
+        <label className="form-label">{t(`widget.commonProperties.icon`, 'Icon')}</label>
       </div>
       <div className="card mb-3">
         <div className="card-body p-0">
