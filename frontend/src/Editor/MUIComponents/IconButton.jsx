@@ -10,7 +10,7 @@ export const IconButton = function IconButton(props) {
   const { height, properties, styles, fireEvent, registerAction, id, dataCy, setExposedVariable } = props;
   const { iconColor, backgroundColor, textColor, borderRadius, loaderColor, disabledState, borderColor, boxShadow } =
     styles;
-  const { icon, iconPosition, textPosition } = properties;
+  const { icon, alignIcon, alignText } = properties;
   const IconElement = IconsMUI[icon];
 
   const [label, setLabel] = useState(properties.text);
@@ -114,7 +114,7 @@ export const IconButton = function IconButton(props) {
         event.stopPropagation();
         fireEvent('onHover');
       }}
-      style={{ fontSize: `${height / 2}px`, ...(iconPosition !== 'middle' ? { marginRight: '8px' } : {}) }}
+      style={{ fontSize: `${height / 2}px`, ...(alignIcon !== 'middle' ? { marginRight: '8px' } : {}) }}
       sx={{
         color: iconColor,
       }}
@@ -150,8 +150,8 @@ export const IconButton = function IconButton(props) {
           />
         }
       >
-        {iconPosition === 'left' && renderIcon()}
-        {textPosition === 'left' && renderText()}
+        {alignIcon === 'left' && renderIcon()}
+        {alignText === 'left' && renderText()}
         <div
           style={{
             display: 'flex',
@@ -161,11 +161,11 @@ export const IconButton = function IconButton(props) {
             flexGrow: 1,
           }}
         >
-          {iconPosition === 'middle' && renderIcon()}
-          {textPosition === 'middle' && renderText()}
+          {alignIcon === 'middle' && renderIcon()}
+          {alignText === 'middle' && renderText()}
         </div>
-        {iconPosition === 'right' && renderIcon()}
-        {textPosition === 'right' && renderText()}
+        {alignIcon === 'right' && renderIcon()}
+        {alignText === 'right' && renderText()}
       </MUIIconButton>
     </div>
   );

@@ -664,7 +664,11 @@
       "setColor": "Establecer color",
       "structure": "Estructura",
       "checkedValues": "Valores marcados",
-      "expandedValues": "Valores expandidos"
+      "expandedValues": "Valores expandidos",
+      "icon": "Ícono",
+      "alignIcon": "Alinear ícono",
+      "iconColor": "Color del ícono",
+      "borderColor": "Color del borde"
     },
     "Table": {
       "displayName": "Tabla",
@@ -903,6 +907,10 @@
     "TreeSelect": {
       "displayName": "Selección de árbol",
       "description": "Selección de valores de un árbol"
+    },
+    "IconButton": {
+      "displayName": "Botón de Icono",
+      "description": "Invocar acciones: consultas, alertas, etc."
     }
   },
   "leftSidebar": {
