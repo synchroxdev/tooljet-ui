@@ -720,7 +720,8 @@
       "addAnotherRow": "Agregar otra fila",
       "toggleRowSelected": "Seleccionar fila",
       "toggleAllCurrentPageRowsSelected": "Seleccionar todas las filas de la página",
-
+      "saveChanges": "Guardar cambios",
+      "discardChanges": "Descartar cambios",
       "noActionMessage": "Esta tabla no tiene botones de acción",
       "records": "Filas"
     },
