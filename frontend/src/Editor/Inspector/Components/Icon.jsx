@@ -11,6 +11,7 @@ import { VirtuosoGrid } from 'react-virtuoso';
 
 import config from 'config';
 import * as IconsMUI from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 export function Icon({ componentMeta, darkMode, ...restProps }) {
   const {
@@ -24,7 +25,7 @@ export function Icon({ componentMeta, darkMode, ...restProps }) {
     allComponents,
     pages,
   } = restProps;
-
+  const { t } = useTranslation();
   const [searchText, setSearchText] = useState('');
   const [showPopOver, setPopOverVisibility] = useState(false);
   const iconList = useRef(Object.keys(config.UI_LIB === 'mui' ? IconsMUI : Icons));
@@ -104,7 +105,7 @@ export function Icon({ componentMeta, darkMode, ...restProps }) {
     return (
       <>
         <div className="mb-2 field">
-          <label className="form-label">Icon</label>
+          <label className="form-label">{t('widget.common.icon', 'icono')}</label>
         </div>
         <div className="card mb-3">
           <div className="card-body p-0">
@@ -142,12 +143,12 @@ export function Icon({ componentMeta, darkMode, ...restProps }) {
   let items = [];
 
   items.push({
-    title: 'Properties',
+    title: t('widget.common.properties', 'Properties'),
     children: renderIconPicker(),
   });
 
   items.push({
-    title: 'Events',
+    title: t('widget.common.events', 'Events'),
     isOpen: false,
     children: (
       <EventManager
@@ -184,7 +185,7 @@ export function Icon({ componentMeta, darkMode, ...restProps }) {
   });
 
   items.push({
-    title: 'Layout',
+    title: t('widget.common.layout', 'Layout'),
     isOpen: false,
     children: (
       <>
