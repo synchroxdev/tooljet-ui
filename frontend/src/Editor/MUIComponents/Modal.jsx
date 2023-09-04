@@ -206,12 +206,7 @@ export const Modal = function Modal({
             setExposedVariable('show', true);
           }}
           sx={{
-            backgroundColor: triggerButtonBackgroundColor,
-            color: triggerButtonTextColor,
-            width: '100%',
-            display: visibility ? '' : 'none',
-            '--tblr-btn-color-darker': tinycolor(triggerButtonBackgroundColor).darken(8).toString(),
-            boxShadow,
+            ...customStyles.buttonStyles,
           }}
         >
           {triggerButtonLabel !== '' ? triggerButtonLabel : t('widget.Modal.showModal', 'Show Modal')}
@@ -290,13 +285,7 @@ const Component = ({ children, ...restProps }) => {
     showModal,
     size,
     hideOnEsc,
-    headerBackgroundColor,
-    headerTextColor,
-    darkMode,
-    backwardCompatibilityCheck,
-    modalHeight,
-    height,
-    bodyBackgroundColor,
+    closeOnClickingOutside,
     customStyles,
     parentRef,
     id,
@@ -320,7 +309,7 @@ const Component = ({ children, ...restProps }) => {
       disableEscapeKeyDown={!hideOnEsc}
       onClose={(e, reason) => {
         if (reason === 'backdropClick') {
-          if (restProps.closeOnClickingOutside) {
+          if (closeOnClickingOutside) {
             e.preventDefault();
             e.stopPropagation();
             hideModal();
@@ -332,6 +321,7 @@ const Component = ({ children, ...restProps }) => {
         }
       }}
       container={document.getElementsByClassName('canvas-area')[0]}
+      sx={{ overflow: 'hidden' }}
     >
       {showConfigHandler && (
         <ConfigHandle
@@ -344,21 +334,15 @@ const Component = ({ children, ...restProps }) => {
       )}
       {!hideTitleBar && (
         <DialogTitle
+          id="contained-modal-title-vcenter"
+          data-cy={`modal-title`}
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
-            backgroundColor:
-              ['#fff', '#ffffffff'].includes(headerBackgroundColor) && darkMode ? '#1F2837' : headerBackgroundColor,
+            ...customStyles.modalHeader,
           }}
         >
-          <Typography
-            variant="h5"
-            sx={{
-              color: ['#000', '#000000', '#000000ff'].includes(headerTextColor) && darkMode ? '#fff' : headerTextColor,
-            }}
-          >
-            {title}
-          </Typography>
+          <Typography variant="h5">{title}</Typography>
           {!hideCloseButton && (
             <IconButton
               color="primary"
@@ -379,14 +363,21 @@ const Component = ({ children, ...restProps }) => {
         id={id}
         data-cy={`modal-body`}
         sx={{
-          height: backwardCompatibilityCheck ? modalHeight : height,
-          backgroundColor:
-            ['#fff', '#ffffffff'].includes(bodyBackgroundColor) && darkMode ? '#1F2837' : bodyBackgroundColor,
-          overflowX: 'hidden',
-          overflowY: 'auto',
+          ...customStyles.modalBody,
         }}
       >
-        {children}
+        <Box
+          sx={{
+            width: '100%',
+            height: '100%',
+            overflowY: 'auto',
+            '& .real-canvas': {
+              position: 'inherit !important',
+            },
+          }}
+        >
+          {children}
+        </Box>
       </DialogContent>
     </Dialog>
   );
