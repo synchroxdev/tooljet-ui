@@ -16,6 +16,8 @@ import {
 } from '@mui/material';
 import { IconX } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
+import { SubContainer } from '../SubContainer';
+import { SubCustomDragLayer } from '../SubCustomDragLayer';
 
 export const Modal = function Modal({
   id,
@@ -188,7 +190,11 @@ export const Modal = function Modal({
   const { t } = useTranslation();
 
   return (
-    <>
+    <div
+      className="container"
+      data-disabled={disabledState}
+      data-cy={dataCy}
+    >
       {useDefaultButton && (
         <Button
           variant="contained"
@@ -212,90 +218,85 @@ export const Modal = function Modal({
         </Button>
       )}
 
-      <Dialog
-        open={showModal}
-        fullWidth
-        maxWidth={size}
-        disableEnforceFocus
-        disableEscapeKeyDown={!hideOnEsc}
-        onClose={(e, reason) => {
-          if (reason === 'backdropClick') {
-            if (closeOnClickingOutside) {
-              e.preventDefault();
-              e.stopPropagation();
-              hideModal();
-            }
-          } else {
-            e.preventDefault();
-            e.stopPropagation();
-            hideModal();
-          }
-        }}
+      <Modal.Component
+        show={showModal}
+        contentClassName="modal-component"
         container={document.getElementsByClassName('canvas-area')[0]}
+        size={size}
+        keyboard={true}
+        enforceFocus={false}
+        animation={false}
+        onEscapeKeyDown={() => hideOnEsc && hideModal()}
+        id="modal-container"
+        backdrop={'static'}
+        modalProps={{
+          showModal,
+          size,
+          hideOnEsc,
+          headerBackgroundColor,
+          headerTextColor,
+          darkMode,
+          backwardCompatibilityCheck,
+          modalHeight,
+          height,
+          bodyBackgroundColor,
+          closeOnClickingOutside,
+          customStyles,
+          parentRef,
+          id,
+          title,
+          hideTitleBar,
+          hideCloseButton,
+          hideModal,
+          component,
+          showConfigHandler: containerProps.mode === 'edit',
+          removeComponent: containerProps.removeComponent,
+          setSelected: containerProps.setSelectedComponent,
+        }}
       >
-        {!hideTitleBar && (
-          <DialogTitle
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              backgroundColor:
-                ['#fff', '#ffffffff'].includes(headerBackgroundColor) && darkMode ? '#1F2837' : headerBackgroundColor,
-            }}
+        {!loadingState ? (
+          <>
+            <SubContainer
+              parent={id}
+              {...containerProps}
+              parentRef={parentRef}
+              parentComponent={component}
+            />
+            <SubCustomDragLayer
+              snapToGrid={true}
+              parentRef={parentRef}
+              parent={id}
+              currentLayout={containerProps.currentLayout}
+            />
+          </>
+        ) : (
+          <Box
+            width="100%"
+            height="100%"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
           >
-            <Typography
-              variant="h5"
-              sx={{
-                color:
-                  ['#000', '#000000', '#000000ff'].includes(headerTextColor) && darkMode ? '#fff' : headerTextColor,
-              }}
-            >
-              {title}
-            </Typography>
-            {!hideCloseButton && (
-              <IconButton
-                color="primary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  hideModal();
-                }}
-              >
-                <IconX />
-              </IconButton>
-            )}
-          </DialogTitle>
-        )}
-        <Divider color="secondary" />
-        <DialogContent
-          sx={{
-            height: backwardCompatibilityCheck ? modalHeight : height,
-            backgroundColor:
-              ['#fff', '#ffffffff'].includes(bodyBackgroundColor) && darkMode ? '#1F2837' : bodyBackgroundColor,
-            overflowX: 'hidden',
-            overflowY: 'auto',
-          }}
-        >
-          <Box>
-            {loadingState && (
-              <Box
-                width="100%"
-                height="100%"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <CircularProgress size={50} />
-              </Box>
-            )}
+            <CircularProgress size={50} />
           </Box>
-        </DialogContent>
-      </Dialog>
-    </>
+        )}
+      </Modal.Component>
+    </div>
   );
 };
 
 const Component = ({ children, ...restProps }) => {
   const {
+    showModal,
+    size,
+    hideOnEsc,
+    headerBackgroundColor,
+    headerTextColor,
+    darkMode,
+    backwardCompatibilityCheck,
+    modalHeight,
+    height,
+    bodyBackgroundColor,
     customStyles,
     parentRef,
     id,
@@ -310,7 +311,28 @@ const Component = ({ children, ...restProps }) => {
   } = restProps['modalProps'];
 
   return (
-    <BootstrapModal {...restProps}>
+    <Dialog
+      open={showModal}
+      fullWidth
+      disableEnforceFocus
+      maxWidth={size}
+      contentClassName="modal-component"
+      disableEscapeKeyDown={!hideOnEsc}
+      onClose={(e, reason) => {
+        if (reason === 'backdropClick') {
+          if (restProps.closeOnClickingOutside) {
+            e.preventDefault();
+            e.stopPropagation();
+            hideModal();
+          }
+        } else {
+          e.preventDefault();
+          e.stopPropagation();
+          hideModal();
+        }
+      }}
+      container={document.getElementsByClassName('canvas-area')[0]}
+    >
       {showConfigHandler && (
         <ConfigHandle
           id={id}
@@ -321,70 +343,52 @@ const Component = ({ children, ...restProps }) => {
         />
       )}
       {!hideTitleBar && (
-        <BootstrapModal.Header
-          style={{ ...customStyles.modalHeader }}
-          data-cy={`modal-header`}
+        <DialogTitle
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            backgroundColor:
+              ['#fff', '#ffffffff'].includes(headerBackgroundColor) && darkMode ? '#1F2837' : headerBackgroundColor,
+          }}
         >
-          <BootstrapModal.Title
-            id="contained-modal-title-vcenter"
-            data-cy={`modal-title`}
+          <Typography
+            variant="h5"
+            sx={{
+              color: ['#000', '#000000', '#000000ff'].includes(headerTextColor) && darkMode ? '#fff' : headerTextColor,
+            }}
           >
             {title}
-          </BootstrapModal.Title>
+          </Typography>
           {!hideCloseButton && (
-            <span
-              className="cursor-pointer"
-              data-cy={`modal-close-button`}
-              size="sm"
+            <IconButton
+              color="primary"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 hideModal();
               }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-x"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path
-                  stroke="none"
-                  d="M0 0h24v24H0z"
-                  fill="none"
-                ></path>
-                <line
-                  x1="18"
-                  y1="6"
-                  x2="6"
-                  y2="18"
-                ></line>
-                <line
-                  x1="6"
-                  y1="6"
-                  x2="18"
-                  y2="18"
-                ></line>
-              </svg>
-            </span>
+              <IconX />
+            </IconButton>
           )}
-        </BootstrapModal.Header>
+        </DialogTitle>
       )}
-      <BootstrapModal.Body
-        style={{ ...customStyles.modalBody }}
+      <Divider color="secondary" />
+      <DialogContent
         ref={parentRef}
         id={id}
         data-cy={`modal-body`}
+        sx={{
+          height: backwardCompatibilityCheck ? modalHeight : height,
+          backgroundColor:
+            ['#fff', '#ffffffff'].includes(bodyBackgroundColor) && darkMode ? '#1F2837' : bodyBackgroundColor,
+          overflowX: 'hidden',
+          overflowY: 'auto',
+        }}
       >
         {children}
-      </BootstrapModal.Body>
-    </BootstrapModal>
+      </DialogContent>
+    </Dialog>
   );
 };
 
