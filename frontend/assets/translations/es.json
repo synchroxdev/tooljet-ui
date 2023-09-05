@@ -669,7 +669,9 @@
       "alignIcon": "Alinear ícono",
       "iconColor": "Color del ícono",
       "borderColor": "Color del borde",
-      "options": "Opciones"
+      "options": "Opciones",
+      "dragAndDropHelp": "Arrastre y suelte los archivos aquí, o haga clic para seleccionar los archivos",
+      "enableMultipleSelection": "Activar la selección múltiple"
     },
     "Table": {
       "displayName": "Tabla",
@@ -816,8 +818,7 @@
     },
     "FilePicker": {
       "displayName": "Selector de archivos",
-      "description": "Selector de archivos",
-      "dragAndDropHelp": "Arrastre y suelte los archivos aquí, o haga clic para seleccionar los archivos"
+      "description": "Selector de archivos"
     },
     "Calendar": {
       "displayName": "Calendario",
