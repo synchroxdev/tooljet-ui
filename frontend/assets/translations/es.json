@@ -1,7 +1,7 @@
 {
   "globals": {
     "start": "Inicio",
-    "end": "Fín",
+    "end": "Fin",
     "readDocumentation": "Leer la documentación",
     "cancel": "Cancelar",
     "save": "Guardar",
