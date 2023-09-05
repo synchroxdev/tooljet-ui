@@ -105,7 +105,7 @@ export function Icon({ componentMeta, darkMode, ...restProps }) {
     return (
       <>
         <div className="mb-2 field">
-          <label className="form-label">{t('widget.common.icon', 'icono')}</label>
+          <label className="form-label">{t('widget.commonProperties.icon', 'Icon')}</label>
         </div>
         <div className="card mb-3">
           <div className="card-body p-0">

@@ -49,7 +49,7 @@ export const DaterangePicker = function DaterangePicker({
             onChange={(newValue) => setValue(newValue)}
             localeText={{
               start: t('globals.start', 'Start'),
-              end: 'Fin',
+              end: t('globals.end', 'end'),
             }}
             sx={{
               '& .MuiOutlinedInput-root': {
