@@ -3,6 +3,7 @@ import Accordion from '@/_ui/Accordion';
 import { renderElement } from '../Utils';
 import { baseComponentProperties } from './DefaultComponent';
 import { resolveReferences } from '@/_helpers/utils';
+import { useTranslation } from 'react-i18next';
 
 export const FilePicker = ({ componentMeta, darkMode, ...restProps }) => {
   const {
@@ -15,6 +16,7 @@ export const FilePicker = ({ componentMeta, darkMode, ...restProps }) => {
     apps,
     allComponents,
   } = restProps;
+  const { t } = useTranslation();
 
   const renderCustomElement = (param, paramType = 'properties') => {
     return renderElement(component, componentMeta, paramUpdated, dataQueries, param, paramType, currentState);
@@ -38,7 +40,7 @@ export const FilePicker = ({ componentMeta, darkMode, ...restProps }) => {
     });
 
     accordionItems.push({
-      title: 'Options',
+      title: `${t(`widget.commonProperties.options`, 'Options')}`,
       children: renderOptions,
     });
     return accordionItems;
