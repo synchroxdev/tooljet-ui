@@ -668,7 +668,10 @@
       "icon": "Ícono",
       "alignIcon": "Alinear ícono",
       "iconColor": "Color del ícono",
-      "borderColor": "Color del borde"
+      "borderColor": "Color del borde",
+      "options": "Opciones",
+      "dragAndDropHelp": "Arrastre y suelte los archivos aquí, o haga clic para seleccionar los archivos",
+      "enableMultipleSelection": "Activar la selección múltiple"
     },
     "Table": {
       "displayName": "Tabla",
