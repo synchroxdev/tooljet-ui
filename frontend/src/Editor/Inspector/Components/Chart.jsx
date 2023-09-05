@@ -3,8 +3,9 @@ import { renderElement } from '../Utils';
 import { CodeHinter } from '../../CodeBuilder/CodeHinter';
 import Accordion from '@/_ui/Accordion';
 import { resolveReferences } from '@/_helpers/utils';
+import { withTranslation } from 'react-i18next';
 
-class Chart extends React.Component {
+class ChartComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -58,7 +59,7 @@ class Chart extends React.Component {
   render() {
     const { dataQueries, component, paramUpdated, componentMeta, components, currentState } = this.state;
     const data = this.state.component.component.definition.properties.data;
-
+    const { t } = this.props;
     const jsonDescription = this.state.component.component.definition.properties.jsonDescription;
 
     const plotFromJson = resolveReferences(
@@ -71,7 +72,7 @@ class Chart extends React.Component {
     let items = [];
 
     items.push({
-      title: 'Title',
+      title: t('widget.commonProperties.title', 'Title'),
       children: renderElement(
         component,
         componentMeta,
@@ -86,7 +87,7 @@ class Chart extends React.Component {
     });
 
     items.push({
-      title: 'Plotly JSON chart schema',
+      title: t('widget.commonProperties.plotlyJSONChartSchema', 'Plotly JSON Chart Schema'),
       children: renderElement(
         component,
         componentMeta,
@@ -100,7 +101,7 @@ class Chart extends React.Component {
 
     if (plotFromJson) {
       items.push({
-        title: 'Bar mode',
+        title: t('widget.commonProperties.barMode', 'Bar mode'),
         children: renderElement(
           component,
           componentMeta,
@@ -115,7 +116,7 @@ class Chart extends React.Component {
 
     if (plotFromJson) {
       items.push({
-        title: 'JSON description',
+        title: t('widget.commonProperties.JSONDescription', 'JSON description'),
         children: (
           <CodeHinter
             currentState={this.props.currentState}
@@ -131,7 +132,7 @@ class Chart extends React.Component {
       });
     } else {
       items.push({
-        title: 'Properties',
+        title: t('widget.common.properties', 'Properties'),
         children: renderElement(
           component,
           componentMeta,
@@ -145,7 +146,7 @@ class Chart extends React.Component {
       });
 
       items.push({
-        title: 'Chart data',
+        title: t('widget.commonProperties.chartData', 'Chart data'),
         children: (
           <CodeHinter
             currentState={this.props.currentState}
@@ -164,7 +165,7 @@ class Chart extends React.Component {
     if (chartType !== 'pie') {
       if (!plotFromJson) {
         items.push({
-          title: 'Marker color',
+          title: t('widget.commonProperties.markerColor', 'Marker color'),
           children: renderElement(
             component,
             componentMeta,
@@ -178,7 +179,7 @@ class Chart extends React.Component {
       }
 
       items.push({
-        title: 'Options',
+        title: t('widget.common.options', 'Options'),
         children: (
           <>
             {renderElement(
@@ -206,7 +207,7 @@ class Chart extends React.Component {
     }
 
     items.push({
-      title: 'Layout',
+      title: t('widget.common.layout', 'Layout'),
       children: (
         <>
           {renderElement(
@@ -237,4 +238,4 @@ class Chart extends React.Component {
   }
 }
 
-export { Chart };
+export const Chart = withTranslation()(ChartComponent);

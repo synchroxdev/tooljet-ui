@@ -476,6 +476,11 @@
     },
     "commonProperties": {
       "visibility": "Visibilidad",
+      "barMode": "Modo de barra",
+      "JSONDescription": "descripción del JSON ",
+      "plotlyJSONChartSchema": "Trazar esquema de gráfico JSON",
+      "chartData": "Gráfico de datos",
+      "buttonToSubmitForm": "Botón confirmar formulario",
       "disable": "Inutilizar",
       "borderRadius": "Radio del borde",
       "boxShadow": "Sombra de caja",
