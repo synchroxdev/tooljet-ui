@@ -1122,7 +1122,12 @@ export function Table({
         </Box>
       )}
       <Box className="table-responsive jet-data-table">
-        <MUITable {...getTableProps()}>
+        <MUITable
+          {...getTableProps()}
+          className={`table table-vcenter table-nowrap ${tableType} ${darkMode && 'table-dark'} ${
+            tableDetails.addNewRowsDetails.addingNewRows && 'disabled'
+          }`}
+        >
           <TableHead sx={{ backgroundColor: '#E7E7E7' }}>
             {headerGroups.map((headerGroup, index) => (
               <DragDropContext
@@ -1218,7 +1223,10 @@ export function Table({
           )}
 
           {!loadingState && (
-            <TableBody {...getTableBodyProps()}>
+            <TableBody
+              {...getTableBodyProps()}
+              style={{ color: computeFontColor() }}
+            >
               {page.map((row, index) => {
                 prepareRow(row);
                 return (
@@ -1313,7 +1321,20 @@ export function Table({
                           data-cy={`${cell.column.columnType ?? ''}${String(
                             cell.column.id === 'rightActions' || cell.column.id === 'leftActions' ? cell.column.id : ''
                           )}${String(cellValue ?? '').toLocaleLowerCase()}-cell-${index}`}
+                          className={cx(`${wrapAction ? wrapAction : 'wrap'}-wrapper`, {
+                            'has-actions': cell.column.id === 'rightActions' || cell.column.id === 'leftActions',
+                            'has-text': cell.column.columnType === 'text' || isEditable,
+                            'has-dropdown': cell.column.columnType === 'dropdown',
+                            'has-multiselect': cell.column.columnType === 'multiselect',
+                            'has-datepicker': cell.column.columnType === 'datepicker',
+                            'align-items-center flex-column': cell.column.columnType === 'selector',
+                            [cellSize]: true,
+                          })}
                           {...cellProps}
+                          style={{
+                            ...cellProps.style,
+                            backgroundColor: cellBackgroundColor ?? 'inherit',
+                          }}
                           onClick={(e) => {
                             setExposedVariable('selectedCell', {
                               columnName: cell.column.exportValue,
@@ -1406,7 +1427,7 @@ export function Table({
                   }
                   data-cy={`table-button-save-changes`}
                 >
-                  Save Changes
+                  {t('widget.Table.saveChanges', 'Save Changes')}
                 </Button>
 
                 <Button
@@ -1416,7 +1437,7 @@ export function Table({
                   onClick={() => handleChangesDiscarded()}
                   data-cy={`table-button-discard-changes`}
                 >
-                  Discard changes
+                  {t('widget.Table.discardChanges', 'Discard Changes')}
                 </Button>
               </Box>
             ) : (
