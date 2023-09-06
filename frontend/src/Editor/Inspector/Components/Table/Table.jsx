@@ -175,8 +175,14 @@ class TableComponent extends React.Component {
         }}
       >
         <Popover.Body>
-          <div className="field mb-2" data-cy={`dropdown-column-type`}>
-            <label data-cy={`label-column-type`} className="form-label">
+          <div
+            className="field mb-2"
+            data-cy={`dropdown-column-type`}
+          >
+            <label
+              data-cy={`label-column-type`}
+              className="form-label"
+            >
               {this.props.t('widget.Table.columnType', 'Column type')}
             </label>
             <SelectSearch
@@ -207,8 +213,14 @@ class TableComponent extends React.Component {
               placeholder={this.props.t('globals.select', 'Select') + '...'}
             />
           </div>
-          <div className="field mb-2" data-cy={`input-and-label-column-name`}>
-            <label data-cy={`label-column-name`} className="form-label">
+          <div
+            className="field mb-2"
+            data-cy={`input-and-label-column-name`}
+          >
+            <label
+              data-cy={`label-column-name`}
+              className="form-label"
+            >
               {this.props.t('widget.Table.columnName', 'Column name')}
             </label>
             <CodeHinter
@@ -226,8 +238,14 @@ class TableComponent extends React.Component {
             />
           </div>
           {(column.columnType === 'string' || column.columnType === undefined || column.columnType === 'default') && (
-            <div data-cy={`input-overflow`} className="field mb-2">
-              <label data-cy={`label-overflow`} className="form-label">
+            <div
+              data-cy={`input-overflow`}
+              className="field mb-2"
+            >
+              <label
+                data-cy={`label-overflow`}
+                className="form-label"
+              >
                 {this.props.t('widget.Table.overflow', 'Overflow')}
               </label>
               <SelectSearch
@@ -248,7 +266,10 @@ class TableComponent extends React.Component {
               />
             </div>
           )}
-          <div data-cy={`input-and-label-key`} className="field mb-2">
+          <div
+            data-cy={`input-and-label-key`}
+            className="field mb-2"
+          >
             <label className="form-label">{this.props.t('widget.Table.key', 'key')}</label>
             <CodeHinter
               currentState={this.props.currentState}
@@ -267,7 +288,10 @@ class TableComponent extends React.Component {
 
           {(column.columnType === 'string' || column.columnType === undefined || column.columnType === 'default') && (
             <div>
-              <div data-cy={`input-and-label-text-color`} className="field mb-2">
+              <div
+                data-cy={`input-and-label-text-color`}
+                className="field mb-2"
+              >
                 <label className="form-label">{this.props.t('widget.Table.textColor', 'Text color')}</label>
                 <CodeHinter
                   currentState={this.props.currentState}
@@ -285,7 +309,10 @@ class TableComponent extends React.Component {
                   }}
                 />
               </div>
-              <div className="field mb-2" data-cy={`input-and-label-cell-background-color`}>
+              <div
+                className="field mb-2"
+                data-cy={`input-and-label-cell-background-color`}
+              >
                 <label className="form-label">
                   {this.props.t('widget.Table.cellBgColor', 'Cell Background Color')}
                 </label>
@@ -306,10 +333,16 @@ class TableComponent extends React.Component {
 
               {resolveReferences(column.isEditable, this.state.currentState) && (
                 <div>
-                  <div data-cy={`header-validation`} className="hr-text">
+                  <div
+                    data-cy={`header-validation`}
+                    className="hr-text"
+                  >
                     {this.props.t('widget.Table.validation', 'Validation')}
                   </div>
-                  <div data-cy={`input-and-label-regex`} className="field mb-2">
+                  <div
+                    data-cy={`input-and-label-regex`}
+                    className="field mb-2"
+                  >
                     <label className="form-label">{this.props.t('widget.Table.regex', 'Regex')}</label>
                     <CodeHinter
                       currentState={this.props.currentState}
@@ -325,7 +358,10 @@ class TableComponent extends React.Component {
                       }}
                     />
                   </div>
-                  <div data-cy={`input-and-label-min-length`} className="field mb-2">
+                  <div
+                    data-cy={`input-and-label-min-length`}
+                    className="field mb-2"
+                  >
                     <label className="form-label">{this.props.t('widget.Table.minLength', 'Min length')}</label>
                     <CodeHinter
                       currentState={this.props.currentState}
@@ -341,7 +377,10 @@ class TableComponent extends React.Component {
                       }}
                     />
                   </div>
-                  <div data-cy={`input-and-label-max-length`} className="field mb-2">
+                  <div
+                    data-cy={`input-and-label-max-length`}
+                    className="field mb-2"
+                  >
                     <label className="form-label">{this.props.t('widget.Table.maxLength', 'Max length')}</label>
                     <CodeHinter
                       currentState={this.props.currentState}
@@ -357,7 +396,10 @@ class TableComponent extends React.Component {
                       }}
                     />
                   </div>
-                  <div data-cy={`input-and-label-custom-rule`} className="field mb-2">
+                  <div
+                    data-cy={`input-and-label-custom-rule`}
+                    className="field mb-2"
+                  >
                     <label className="form-label">{this.props.t('widget.Table.customRule', 'Custom rule')}</label>
                     <CodeHinter
                       currentState={this.props.currentState}
@@ -380,10 +422,16 @@ class TableComponent extends React.Component {
 
           {column.columnType === 'number' && resolveReferences(column.isEditable, this.state.currentState) && (
             <div>
-              <div className="hr-text" data-cy={`header-validation`}>
+              <div
+                className="hr-text"
+                data-cy={`header-validation`}
+              >
                 {this.props.t('widget.Table.validation', 'Validation')}
               </div>
-              <div data-cy={`input-and-label-min-value`} className="field mb-2">
+              <div
+                data-cy={`input-and-label-min-value`}
+                className="field mb-2"
+              >
                 <label className="form-label">{this.props.t('widget.Table.minValue', 'Min value')}</label>
                 <CodeHinter
                   currentState={this.props.currentState}
@@ -399,7 +447,10 @@ class TableComponent extends React.Component {
                   }}
                 />
               </div>
-              <div data-cy={`input-and-label-max-value`} className="field mb-2">
+              <div
+                data-cy={`input-and-label-max-value`}
+                className="field mb-2"
+              >
                 <label className="form-label">{this.props.t('widget.Table.maxValue', 'Max value')}</label>
                 <CodeHinter
                   currentState={this.props.currentState}
@@ -458,7 +509,10 @@ class TableComponent extends React.Component {
             column.columnType === 'badges' ||
             column.columnType === 'radio') && (
             <div>
-              <div data-cy={`input-and-label-values`} className="field mb-2">
+              <div
+                data-cy={`input-and-label-values`}
+                className="field mb-2"
+              >
                 <label className="form-label">{this.props.t('widget.Table.values', 'Values')}</label>
                 <CodeHinter
                   currentState={this.props.currentState}
@@ -474,7 +528,10 @@ class TableComponent extends React.Component {
                   }}
                 />
               </div>
-              <div data-cy={`input-and-label-labels`} className="field mb-2">
+              <div
+                data-cy={`input-and-label-labels`}
+                className="field mb-2"
+              >
                 <label className="form-label">{this.props.t('widget.Table.labels', 'Labels')}</label>
                 <CodeHinter
                   currentState={this.props.currentState}
@@ -497,10 +554,16 @@ class TableComponent extends React.Component {
             <>
               {resolveReferences(column.isEditable, this.state.currentState) && (
                 <div>
-                  <div data-cy={`header-validations`} className="hr-text">
+                  <div
+                    data-cy={`header-validations`}
+                    className="hr-text"
+                  >
                     {this.props.t('widget.Table.validation', 'Validation')}
                   </div>
-                  <div data-cy={`input-and-label-custom-rule`} className="field mb-2">
+                  <div
+                    data-cy={`input-and-label-custom-rule`}
+                    className="field mb-2"
+                  >
                     <label className="form-label">{this.props.t('widget.Table.customRule', 'Custom Rule')}</label>
                     <CodeHinter
                       currentState={this.props.currentState}
@@ -523,10 +586,16 @@ class TableComponent extends React.Component {
 
           {column.columnType === 'datepicker' && (
             <div>
-              <label data-cy={`label-date-display-format`} className="form-label">
+              <label
+                data-cy={`label-date-display-format`}
+                className="form-label"
+              >
                 {this.props.t('widget.Table.dateDisplayformat', 'Date Display Format')}
               </label>
-              <div data-cy={`input-date-display-format`} className="field mb-2">
+              <div
+                data-cy={`input-date-display-format`}
+                className="field mb-2"
+              >
                 <CodeHinter
                   currentState={this.props.currentState}
                   initialValue={column.dateFormat}
@@ -541,7 +610,10 @@ class TableComponent extends React.Component {
                   }}
                 />
               </div>
-              <label data-cy={`label-date-parse-format`} className="form-label">
+              <label
+                data-cy={`label-date-parse-format`}
+                className="form-label"
+              >
                 {this.props.t('widget.Table.dateParseformat', 'Date Parse Format')}
               </label>
               <div className="field mb-2">
@@ -557,10 +629,16 @@ class TableComponent extends React.Component {
                   placeholder={'DD-MM-YYYY'}
                 />
               </div>
-              <label data-cy={`label-parse-timezone`} className="form-label">
+              <label
+                data-cy={`label-parse-timezone`}
+                className="form-label"
+              >
                 Parse in timezone
               </label>
-              <div data-cy={`input-parse-timezone`} className="field mb-2">
+              <div
+                data-cy={`input-parse-timezone`}
+                className="field mb-2"
+              >
                 <SelectSearch
                   className={'select-search'}
                   options={timeZoneOptions}
@@ -574,10 +652,16 @@ class TableComponent extends React.Component {
                   placeholder="Select.."
                 />
               </div>
-              <label data-cy={`label-display-time-zone`} className="form-label">
+              <label
+                data-cy={`label-display-time-zone`}
+                className="form-label"
+              >
                 Display in timezone
               </label>
-              <div ata-cy={`input-display-time-zone`} className="field mb-2">
+              <div
+                ata-cy={`input-display-time-zone`}
+                className="field mb-2"
+              >
                 <SelectSearch
                   className={'select-search'}
                   options={timeZoneOptions}
@@ -602,7 +686,10 @@ class TableComponent extends React.Component {
                     }}
                     checked={column.isTimeChecked}
                   />
-                  <span data-cy={`label-show-time`} className="form-check-label">
+                  <span
+                    data-cy={`label-show-time`}
+                    className="form-check-label"
+                  >
                     {this.props.t('widget.Table.showTime', 'show time')}
                   </span>
                 </div>
@@ -611,7 +698,10 @@ class TableComponent extends React.Component {
           )}
           {column.columnType === 'image' && (
             <>
-              <div data-cy={`input-and-label-border-radius`} className="field mb-2">
+              <div
+                data-cy={`input-and-label-border-radius`}
+                className="field mb-2"
+              >
                 <label className="form-label">{this.props.t('widget.Table.borderRadius', 'Border radius')}</label>
                 <CodeHinter
                   currentState={this.props.currentState}
@@ -624,7 +714,10 @@ class TableComponent extends React.Component {
                   componentName={this.getPopoverFieldSource(column.columnType, 'borderRadius')}
                 />
               </div>
-              <div data-cy={`input-and-label-width`} className="field mb-2">
+              <div
+                data-cy={`input-and-label-width`}
+                className="field mb-2"
+              >
                 <label className="form-label">{this.props.t('widget.Table.width', 'Width')}</label>
                 <CodeHinter
                   currentState={this.props.currentState}
@@ -637,7 +730,10 @@ class TableComponent extends React.Component {
                   componentName={this.getPopoverFieldSource(column.columnType, 'width')}
                 />
               </div>
-              <div data-cy={`input-and-label-height`} className="field mb-2">
+              <div
+                data-cy={`input-and-label-height`}
+                className="field mb-2"
+              >
                 <label className="form-label">{this.props.t('widget.Table.height', 'Height')}</label>
                 <CodeHinter
                   currentState={this.props.currentState}
@@ -650,7 +746,10 @@ class TableComponent extends React.Component {
                   componentName={this.getPopoverFieldSource(column.columnType, 'height')}
                 />
               </div>
-              <div data-cy={`input-and-label-object-fit`} className="field mb-2">
+              <div
+                data-cy={`input-and-label-object-fit`}
+                className="field mb-2"
+              >
                 <label className="form-label">{this.props.t('widget.Table.objectFit', 'Object fit')}</label>
                 <SelectSearch
                   className={'select-search'}
@@ -698,7 +797,7 @@ class TableComponent extends React.Component {
               property="isEditable"
               props={column}
               component={this.props.component}
-              paramMeta={{ type: 'toggle', displayName: 'make editable' }}
+              paramMeta={{ type: 'toggle', displayName: this.props.t('widget.Table.makeEditable', 'Make Editable') }}
               paramType="properties"
             />
           )}
@@ -712,7 +811,10 @@ class TableComponent extends React.Component {
             property="columnVisibility"
             props={column}
             component={this.props.component}
-            paramMeta={{ type: 'toggle', displayName: 'Column visibility' }}
+            paramMeta={{
+              type: 'toggle',
+              displayName: this.props.t('widget.Table.columnVisibility', 'Column visibility'),
+            }}
             paramType="properties"
           />
         </Popover.Body>
@@ -730,10 +832,16 @@ class TableComponent extends React.Component {
     };
 
     return (
-      <Popover id="popover-basic" className={`${this.props.darkMode && 'popover-dark-themed theme-dark'} shadow`}>
+      <Popover
+        id="popover-basic"
+        className={`${this.props.darkMode && 'popover-dark-themed theme-dark'} shadow`}
+      >
         <Popover.Body>
           <div className="field mb-2">
-            <label data-cy={`label-action-button-text`} className="form-label">
+            <label
+              data-cy={`label-action-button-text`}
+              className="form-label"
+            >
               {this.props.t('widget.Table.buttonText', 'Button Text')}
             </label>
             <input
@@ -747,8 +855,14 @@ class TableComponent extends React.Component {
               value={action.buttonText}
             />
           </div>
-          <div className="field mb-2" data-cy={`dropdown-action-button-position`}>
-            <label data-cy={`label-action-button-position`} className="form-label">
+          <div
+            className="field mb-2"
+            data-cy={`dropdown-action-button-position`}
+          >
+            <label
+              data-cy={`label-action-button-position`}
+              className="form-label"
+            >
               {this.props.t('widget.Table.buttonPosition', 'Button Position')}
             </label>
             <SelectSearch
@@ -792,7 +906,10 @@ class TableComponent extends React.Component {
             property="disableActionButton"
             props={action}
             component={this.props.component}
-            paramMeta={{ type: 'toggle', displayName: 'Disable action button' }}
+            paramMeta={{
+              type: 'toggle',
+              displayName: this.props.t('widget.Table.disableActionButton', 'Disable action button'),
+            }}
             paramType="properties"
           />
           <EventManager
@@ -809,7 +926,10 @@ class TableComponent extends React.Component {
             }}
             pages={this.props.pages}
           />
-          <button className="btn btn-sm btn-outline-danger mt-2 col" onClick={() => this.removeAction(index)}>
+          <button
+            className="btn btn-sm btn-outline-danger mt-2 col"
+            onClick={() => this.removeAction(index)}
+          >
             {this.props.t('widget.Table.remove', 'Remove')}
           </button>
         </Popover.Body>
@@ -826,7 +946,10 @@ class TableComponent extends React.Component {
         overlay={this.actionPopOver(action, index)}
         onToggle={(showing) => this.setState({ showPopOver: showing })}
       >
-        <div className={`card p-2 mb-1 ${this.props.darkMode ? 'bg-secondary' : 'bg-light'}`} role="button">
+        <div
+          className={`card p-2 mb-1 ${this.props.darkMode ? 'bg-secondary' : 'bg-light'}`}
+          role="button"
+        >
           <div className={`row ${this.props.darkMode ? '' : 'bg-light'}`}>
             <div className="col-auto">
               <div
@@ -966,7 +1089,7 @@ class TableComponent extends React.Component {
     let items = [];
 
     items.push({
-      title: 'Properties',
+      title: this.props.t('widget.common.properties', 'Properties'),
       children: renderElement(
         component,
         componentMeta,
@@ -981,7 +1104,7 @@ class TableComponent extends React.Component {
     });
 
     items.push({
-      title: 'Columns',
+      title: this.props.t('widget.Table.column', 'Columns'),
       children: (
         <div>
           {!useDynamicColumn && (
@@ -1002,11 +1125,19 @@ class TableComponent extends React.Component {
               >
                 <Droppable droppableId="droppable">
                   {({ innerRef, droppableProps, placeholder }) => (
-                    <div className="w-100" {...droppableProps} ref={innerRef}>
+                    <div
+                      className="w-100"
+                      {...droppableProps}
+                      ref={innerRef}
+                    >
                       {columns.value.map((item, index) => {
                         const resolvedItemName = resolveReferences(item.name, this.state.currentState);
                         return (
-                          <Draggable key={item.id} draggableId={item.id} index={index}>
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                          >
                             {(provided, snapshot) => (
                               <div
                                 className={`card p-2 column-sort-row mb-1 ${this.props.darkMode ? '' : 'bg-light'}`}
@@ -1023,7 +1154,10 @@ class TableComponent extends React.Component {
                                   overlay={this.columnPopover(item, index)}
                                 >
                                   <div key={resolvedItemName}>
-                                    <div className={`row ${this.props.darkMode ? '' : 'bg-light'}`} role="button">
+                                    <div
+                                      className={`row ${this.props.darkMode ? '' : 'bg-light'}`}
+                                      role="button"
+                                    >
                                       <div className="col-auto">
                                         <img
                                           data-cy={`draggable-handle-column-${resolvedItemName}`}
@@ -1031,7 +1165,10 @@ class TableComponent extends React.Component {
                                         />
                                       </div>
                                       <div className="col">
-                                        <div className="text" data-cy={`column-${resolvedItemName}`}>
+                                        <div
+                                          className="text"
+                                          data-cy={`column-${resolvedItemName}`}
+                                        >
                                           {resolvedItemName}
                                         </div>
                                       </div>
@@ -1073,7 +1210,7 @@ class TableComponent extends React.Component {
     });
 
     items.push({
-      title: 'Action buttons',
+      title: this.props.t('widget.common.actionButtons', 'Action buttons'),
       children: (
         <div className="field mb-2 mt-2">
           <div className="row g-2">
@@ -1090,7 +1227,10 @@ class TableComponent extends React.Component {
           <div>{actions.value.map((action, index) => this.actionButton(action, index))}</div>
           {actions.value.length === 0 && (
             <div className="text-center">
-              <small data-cy="message-no-action-button" className="color-disabled">
+              <small
+                data-cy="message-no-action-button"
+                className="color-disabled"
+              >
                 {this.props.t('widget.Table.noActionMessage', "This table doesn't have any action buttons")}
               </small>
             </div>
@@ -1134,12 +1274,12 @@ class TableComponent extends React.Component {
     });
 
     items.push({
-      title: 'Options',
+      title: this.props.t('widget.common.options', 'Options'),
       children: renderOptions,
     });
 
     items.push({
-      title: 'Events',
+      title: this.props.t('widget.common.events', 'Events'),
       isOpen: true,
       children: (
         <EventManager
@@ -1156,7 +1296,7 @@ class TableComponent extends React.Component {
     });
 
     items.push({
-      title: 'Layout',
+      title: this.props.t('widget.common.layout', 'Layout'),
       isOpen: true,
       children: (
         <>

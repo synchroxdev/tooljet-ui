@@ -1,5 +1,7 @@
 {
   "globals": {
+    "start": "Inicio",
+    "end": "Fin",
     "readDocumentation": "Leer la documentación",
     "cancel": "Cancelar",
     "save": "Guardar",
@@ -62,7 +64,7 @@
   },
   "googleSheets": {
     "readOnly": "Solo lectura",
-    "enableReadAndWrite": "Si deseas que ToolJet pueda modificar tus hojas de Google Sheet, asegurate de seleccionar permisos de lectura y escritura.",
+    "enableReadAndWrite": "Si deseas que ToolJet pueda modificar tus hojas de Google Sheet, asegúrate de seleccionar permisos de lectura y escritura.",
     "readDataFromSheets": "Tus aplicaciones de ToolJet sólo pueden leer datos de tus hojas de Google Sheets.",
     "readWrite": "Lectura y escritura",
     "readModifySheets": "Tus aplicaciones de ToolJet pueden leer, modificar y más en tus hojas de Google Sheets.",
@@ -133,7 +135,7 @@
             "dataSourceSaved": "Fuente de datos guardada"
           },
           "error": {
-            "noEmptyDsName": "El nombre de la fuenta de datos no puede estar vacío"
+            "noEmptyDsName": "El nombre de la fuente de datos no puede estar vacío"
           }
         },
         "suggestDataSource": "Sugerir fuente de datos",
@@ -249,7 +251,7 @@
             "apps": "Aplicaciones",
             "users": "Usuarios",
             "permissions": "Permisos",
-            "addAppsToGroup": "Seleccionar applicaciones para añadir al grupo.",
+            "addAppsToGroup": "Seleccionar aplicaciones para añadir al grupo.",
             "name": "Nombre",
             "addUsersToGroup": "Seleccionar usuarios para añadir al grupo.",
             "email": "Correo electrónico",
@@ -460,7 +462,9 @@
   "widget": {
     "common": {
       "properties": "Propiedades",
+      "actionButtons": "Botones de Acción",
       "events": "Eventos",
+      "options": "Opciones",
       "layout": "Diseño",
       "styles": "Estilos",
       "general": "General",
@@ -472,6 +476,11 @@
     },
     "commonProperties": {
       "visibility": "Visibilidad",
+      "barMode": "Modo de barra",
+      "JSONDescription": "descripción del JSON ",
+      "plotlyJSONChartSchema": "Trazar esquema de gráfico JSON",
+      "chartData": "Gráfico de datos",
+      "buttonToSubmitForm": "Botón confirmar formulario",
       "disable": "Inutilizar",
       "borderRadius": "Radio del borde",
       "boxShadow": "Sombra de caja",
@@ -671,7 +680,49 @@
       "borderColor": "Color del borde",
       "options": "Opciones",
       "dragAndDropHelp": "Arrastre y suelte los archivos aquí, o haga clic para seleccionar los archivos",
-      "enableMultipleSelection": "Activar la selección múltiple"
+      "enableMultipleSelection": "Activar la selección múltiple",
+      "errorTextColor": "Color de Error",
+      "decimalPlaces": "Cantidad de decimales",
+      "advanced": "Avanzado",
+      "fontWeight": "Grosor de letra",
+      "textDecoration": "Decoración de letra",
+      "textTransformation": "Transformar texto",
+      "fontStyle": "Estilo de fuente",
+      "lineHeight": "Ancho de línea",
+      "textIndent": "Indentación de texto",
+      "letterSpacing": "Espaciado de letras",
+      "wordSpacing": "Espacio entre palabras",
+      "fontVariant": "Variante de fuente",
+      "linkTarget": "URL de redireccionamiento",
+      "linkText": "Texto a mostrar",
+      "targetType": "Redirección",
+      "underline": "Subrayado",
+      "closeOnEscapeKey": "Cerrar con tecla ESC",
+      "closeOnClickingOutside": "Cerrar al dar clic afuera",
+      "modalHeight": "Altura del modal",
+      "useDefaultTriggerButton": "Usar Botón por defecto",
+      "triggerButtonLabel": "Texto del botón",
+      "headerBackgroundColor": "Color de fondo de la cabecera",
+      "headerTitleColor": "Color título de Cabecera",
+      "bodyBackgroundColor": " Color de fondo del contenido",
+      "triggerButtonBackgroundColor": "Color de fondo del botón",
+      "triggerButtonTextColor": "Color del texto del botón",
+      "useDynamicColumn": "Usar columnas dinámicas",
+      "numberOfRowsPerPage": "Número de filas por página",
+      "enableSorting": "Habilitar ordenamiento por columna",
+      "serverSideSort": "Ordenamiento del lado del servidor",
+      "showAddNewRowButton": "Mostrar agregar nueva fila",
+      "serverSideFilter": "Filtro del lado del servidor",
+      "showUpdateButtons": "Mostrar botones de actualización",
+      "allowSelection": "Permitir seleccionar fila",
+      "defaultSelectedRow": "Fila seleccionada por defecto",
+      "hideColumnSelectorButton": "Esconder botón de selector de columna",
+      "useCustomSchema": " Usar plantilla personalizada",
+      "jsonSchema": "Plantilla JSON",
+      "enablePagination": "Habilitar paginación",
+      "renderOnlyActiveTab": "Renderizar solo pestaña activa",
+      "listOfLabels": "Listado de etiquetas",
+      "showTheDownload": "Mostrar descarga"
     },
     "Table": {
       "displayName": "Tabla",
@@ -725,6 +776,8 @@
       "toggleAllCurrentPageRowsSelected": "Seleccionar todas las filas de la página",
       "saveChanges": "Guardar cambios",
       "discardChanges": "Descartar cambios",
+      "columnVisibility": "Visibilidad de la columna",
+      "disableActionButton": "Deshabilitar botón de acción",
       "noActionMessage": "Esta tabla no tiene botones de acción",
       "records": "Filas"
     },
