@@ -211,7 +211,7 @@ export const customWidgets = [
       },
       confirmText: {
         type: 'code',
-        displayName: 'Botton Confirm Text',
+        displayName: 'Button Confirm Text',
         validation: {
           schema: { type: 'string' },
         },
@@ -225,7 +225,11 @@ export const customWidgets = [
       },
       denyText: {
         type: 'code',
-        displayName: 'Botton Confirm Text',
+        displayName: 'Button Deny Text',
+        conditionallyRender: {
+          key: 'denyButton',
+          value: true,
+        },
         validation: {
           schema: { type: 'string' },
         },
@@ -239,7 +243,11 @@ export const customWidgets = [
       },
       cancelText: {
         type: 'code',
-        displayName: 'Botton Confirm Text',
+        displayName: 'Button Cancel Text',
+        conditionallyRender: {
+          key: 'cancelButton',
+          value: true,
+        },
         validation: {
           schema: { type: 'string' },
         },

@@ -33,9 +33,9 @@ export const ConfirmDialog = (props) => {
       target: document.getElementsByClassName('canvas-area')[0],
     }).then((result) => {
       if (result.isConfirmed) {
-        // Logica de confirmacion.
+        // Lógica de confirmación.
       } else if (result.isDenied) {
-        // Logica de cancelar
+        // Lógica de cancelar
       }
     });
   };
