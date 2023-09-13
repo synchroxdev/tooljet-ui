@@ -17,15 +17,22 @@ const CreateRowDrawer = ({ isCreateRowDrawerOpen, setIsCreateRowDrawerOpen }) =>
         }}
         className="tj-db-header-add-new-row-btn tj-text-xsm font-weight-500"
       >
-        <SolidIcon name="row" width="14" />
+        <SolidIcon
+          name="row"
+          width="14"
+        />
         <span data-cy="add-new-row-button-text">Add new row</span>
       </button>
-      <Drawer isOpen={isCreateRowDrawerOpen} onClose={() => setIsCreateRowDrawerOpen(false)} position="right">
+      <Drawer
+        isOpen={isCreateRowDrawerOpen}
+        onClose={() => setIsCreateRowDrawerOpen(false)}
+        position="right"
+      >
         <CreateRowForm
           onCreate={() => {
-            tooljetDatabaseService.findOne(organizationId, selectedTable).then(({ headers, data = [], error }) => {
+            tooljetDatabaseService.findOne(organizationId, selectedTable.id).then(({ headers, data = [], error }) => {
               if (error) {
-                toast.error(error?.message ?? `Failed to fetch table "${selectedTable}"`);
+                toast.error(error?.message ?? `Failed to fetch table "${selectedTable.table_name}"`);
                 return;
               }
 

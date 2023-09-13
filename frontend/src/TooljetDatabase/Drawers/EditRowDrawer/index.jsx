@@ -14,7 +14,13 @@ const EditRowDrawer = ({ isCreateRowDrawerOpen, setIsCreateRowDrawerOpen }) => {
         onClick={() => setIsCreateRowDrawerOpen(!isCreateRowDrawerOpen)}
         className={`edit-row-btn border-0 ghost-black-operation ${isCreateRowDrawerOpen && 'open'}`}
       >
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -23,16 +29,23 @@ const EditRowDrawer = ({ isCreateRowDrawerOpen, setIsCreateRowDrawerOpen }) => {
           />
         </svg>
         &nbsp;&nbsp;
-        <span data-cy="edit-row-button-text" className="tj-text-xsm font-weight-500">
+        <span
+          data-cy="edit-row-button-text"
+          className="tj-text-xsm font-weight-500"
+        >
           Edit row
         </span>
       </button>
-      <Drawer isOpen={isCreateRowDrawerOpen} onClose={() => setIsCreateRowDrawerOpen(false)} position="right">
+      <Drawer
+        isOpen={isCreateRowDrawerOpen}
+        onClose={() => setIsCreateRowDrawerOpen(false)}
+        position="right"
+      >
         <EditRowForm
           onEdit={() => {
-            tooljetDatabaseService.findOne(organizationId, selectedTable).then(({ headers, data = [], error }) => {
+            tooljetDatabaseService.findOne(organizationId, selectedTable.id).then(({ headers, data = [], error }) => {
               if (error) {
-                toast.error(error?.message ?? `Failed to fetch table "${selectedTable}"`);
+                toast.error(error?.message ?? `Failed to fetch table "${selectedTable.table_name}"`);
                 return;
               }
 

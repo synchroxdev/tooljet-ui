@@ -14,7 +14,7 @@ import HomeHeader from './Header';
 import Modal from './Modal';
 import configs from './Configs/AppIcon.json';
 import { withTranslation } from 'react-i18next';
-import { sample } from 'lodash';
+import { sample, isEmpty } from 'lodash';
 import ExportAppModal from './ExportAppModal';
 import Footer from './Footer';
 import { OrganizationList } from '@/_components/OrganizationManager/List';
@@ -141,11 +141,11 @@ class HomePageComponent extends React.Component {
   cloneApp = (app) => {
     this.setState({ isCloningApp: true });
     appService
-      .cloneApp(app.id)
+      .cloneResource({ app: [{ id: app.id }], organization_id: getWorkspaceId() })
       .then((data) => {
         toast.success('App cloned successfully.');
         this.setState({ isCloningApp: false });
-        this.props.navigate(`/${getWorkspaceId()}/apps/${data.id}`);
+        this.props.navigate(`/${getWorkspaceId()}/apps/${data.imports.app[0].id}`);
       })
       .catch(({ _error }) => {
         toast.error('Could not clone the app.');
@@ -165,24 +165,35 @@ class HomePageComponent extends React.Component {
       const fileContent = event.target.result;
       this.setState({ isImportingApp: true });
       try {
-        const requestBody = JSON.parse(fileContent);
+        const organization_id = getWorkspaceId();
+        let importJSON = JSON.parse(fileContent);
+        // For backward compatibility with legacy app import
+        const isLegacyImport = isEmpty(importJSON.tooljet_version);
+        if (isLegacyImport) {
+          importJSON = { app: [{ definition: importJSON }], tooljet_version: importJSON.tooljetVersion };
+        }
+        const requestBody = { organization_id, ...importJSON };
         appService
-          .importApp(requestBody)
+          .importResource(requestBody)
           .then((data) => {
-            toast.success('App imported successfully.');
+            toast.success('Imported successfully.');
             this.setState({
               isImportingApp: false,
             });
-            this.props.navigate(`/${getWorkspaceId()}/apps/${data.id}`);
+            if (!isEmpty(data.imports.app)) {
+              this.props.navigate(`/${getWorkspaceId()}/apps/${data.imports.app[0].id}`);
+            } else if (!isEmpty(data.imports.tooljet_database)) {
+              this.props.navigate(`/${getWorkspaceId()}/database`);
+            }
           })
           .catch(({ error }) => {
-            toast.error(`Could not import the app: ${error}`);
+            toast.error(`Could not import: ${error}`);
             this.setState({
               isImportingApp: false,
             });
           });
       } catch (error) {
-        toast.error(`Could not import the app: ${error}`);
+        toast.error(`Could not import: ${error}`);
         this.setState({
           isImportingApp: false,
         });
@@ -388,7 +399,10 @@ class HomePageComponent extends React.Component {
         onClick={() => this.setState({ appOperations: { ...appOperations, selectedIcon: icon } })}
         key={index}
       >
-        <BulkIcon name={icon} data-cy={`${icon}-icon`} />
+        <BulkIcon
+          name={icon}
+          data-cy={`${icon}-icon`}
+        />
       </li>
     ));
   };
@@ -452,7 +466,10 @@ class HomePageComponent extends React.Component {
       app,
     } = this.state;
     return (
-      <Layout switchDarkMode={this.props.switchDarkMode} darkMode={this.props.darkMode}>
+      <Layout
+        switchDarkMode={this.props.switchDarkMode}
+        darkMode={this.props.darkMode}
+      >
         <div className="wrapper home-page">
           <ConfirmDialog
             show={showAppDeletionConfirmation}
@@ -494,7 +511,10 @@ class HomePageComponent extends React.Component {
           >
             <div className="row">
               <div className="col modal-main">
-                <div className="mb-3 move-selected-app-to-text " data-cy="move-selected-app-to-text">
+                <div
+                  className="mb-3 move-selected-app-to-text "
+                  data-cy="move-selected-app-to-text"
+                >
                   <p>
                     {this.props.t('homePage.appCard.move', 'Move')}
                     <span>{` "${appOperations?.selectedApp?.name}" `}</span>
@@ -502,7 +522,10 @@ class HomePageComponent extends React.Component {
 
                   <span>{this.props.t('homePage.appCard.to', 'to')}</span>
                 </div>
-                <div data-cy="select-folder" className="select-folder-container">
+                <div
+                  data-cy="select-folder"
+                  className="select-folder-container"
+                >
                   <Select
                     options={this.state.folders.map((folder) => {
                       return { name: folder.name, value: folder.id };
@@ -585,16 +608,28 @@ class HomePageComponent extends React.Component {
             <div className="home-page-sidebar col p-0">
               {this.canCreateApp() && (
                 <div className="create-new-app-wrapper">
-                  <Dropdown as={ButtonGroup} className="d-inline-flex create-new-app-dropdown">
+                  <Dropdown
+                    as={ButtonGroup}
+                    className="d-inline-flex create-new-app-dropdown"
+                  >
                     <Button
                       className={`create-new-app-button col-11 ${creatingApp ? 'btn-loading' : ''}`}
                       onClick={this.createApp}
                       data-cy="create-new-app-button"
                     >
-                      {isImportingApp && <span className="spinner-border spinner-border-sm mx-2" role="status"></span>}
+                      {isImportingApp && (
+                        <span
+                          className="spinner-border spinner-border-sm mx-2"
+                          role="status"
+                        ></span>
+                      )}
                       {this.props.t('homePage.header.createNewApplication', 'Create new app')}
                     </Button>
-                    <Dropdown.Toggle split className="d-inline" data-cy="import-dropdown-menu" />
+                    <Dropdown.Toggle
+                      split
+                      className="d-inline"
+                      data-cy="import-dropdown-menu"
+                    />
                     <Dropdown.Menu className="import-lg-position new-app-dropdown">
                       <Dropdown.Item
                         className="homepage-dropdown-style tj-text tj-text-xsm"
@@ -645,7 +680,10 @@ class HomePageComponent extends React.Component {
               <div className="w-100 mb-5 container home-page-content-container">
                 {(meta?.total_count > 0 || appSearchKey) && (
                   <>
-                    <HomeHeader onSearchSubmit={this.onSearchSubmit} darkMode={this.props.darkMode} />
+                    <HomeHeader
+                      onSearchSubmit={this.onSearchSubmit}
+                      darkMode={this.props.darkMode}
+                    />
                     <div className="liner"></div>
                   </>
                 )}

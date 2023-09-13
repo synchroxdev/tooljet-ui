@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import cx from 'classnames';
 import { useTable, useRowSelect } from 'react-table';
-import { isBoolean } from 'lodash';
+import { isBoolean, isEmpty } from 'lodash';
 import { tooljetDatabaseService } from '@/_services';
 import { TooljetDatabaseContext } from '../index';
 import { toast } from 'react-hot-toast';
@@ -29,26 +29,31 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
   const [isEditColumnDrawerOpen, setIsEditColumnDrawerOpen] = useState(false);
   const [selectedColumn, setSelectedColumn] = useState();
   const [loading, setLoading] = useState(false);
+  const prevSelectedTableRef = useRef({});
 
   const fetchTableMetadata = () => {
-    tooljetDatabaseService.viewTable(organizationId, selectedTable).then(({ data = [], error }) => {
-      if (error) {
-        toast.error(error?.message ?? `Error fetching metadata for table "${selectedTable}"`);
-        return;
-      }
+    if (!isEmpty(selectedTable)) {
+      tooljetDatabaseService.viewTable(organizationId, selectedTable.table_name).then(({ data = [], error }) => {
+        if (error) {
+          toast.error(error?.message ?? `Error fetching metadata for table "${selectedTable.table_name}"`);
+          return;
+        }
 
-      if (data?.result?.length > 0) {
-        setColumns(
-          data?.result.map(({ column_name, data_type, keytype, ...rest }) => ({
-            Header: column_name,
-            accessor: column_name,
-            dataType: data_type,
-            isPrimaryKey: keytype?.toLowerCase() === 'primary key',
-            ...rest,
-          }))
-        );
-      }
-    });
+        if (data?.result?.length > 0) {
+          setColumns(
+            data?.result.map(({ column_name, data_type, keytype, ...rest }) => ({
+              Header: column_name,
+              accessor: column_name,
+              dataType: data_type,
+              isPrimaryKey: keytype?.toLowerCase() === 'primary key',
+              ...rest,
+            }))
+          );
+        }
+      });
+    } else {
+      setColumns([]);
+    }
   };
 
   const fetchTableData = (queryParams = '', pagesize = 50, pagecount = 1) => {
@@ -56,10 +61,10 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
     let params = queryParams ? queryParams : defaultQueryParams;
     setLoading(true);
 
-    tooljetDatabaseService.findOne(organizationId, selectedTable, params).then(({ headers, data = [], error }) => {
+    tooljetDatabaseService.findOne(organizationId, selectedTable.id, params).then(({ headers, data = [], error }) => {
       setLoading(false);
       if (error) {
-        toast.error(error?.message ?? `Error fetching table "${selectedTable}" data`);
+        toast.error(error?.message ?? `Error fetching table "${selectedTable.table_name}" data`);
         return;
       }
       const totalContentRangeRecords = headers['content-range'].split('/')[1] || 0;
@@ -76,9 +81,10 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
   };
 
   useEffect(() => {
-    if (selectedTable) {
+    if (prevSelectedTableRef.current.id !== selectedTable.id && !isEmpty(selectedTable)) {
       onSelectedTableChange();
     }
+    prevSelectedTableRef.current = selectedTable;
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTable]);
@@ -163,14 +169,14 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
 
       let query = `?${primaryKey.accessor}=in.(${deletionKeys.toString()})`;
 
-      const { error } = await tooljetDatabaseService.deleteRow(organizationId, selectedTable, query);
+      const { error } = await tooljetDatabaseService.deleteRows(organizationId, selectedTable.id, query);
 
       if (error) {
-        toast.error(error?.message ?? `Error deleting rows from table "${selectedTable}"`);
+        toast.error(error?.message ?? `Error deleting rows from table "${selectedTable.table_name}"`);
         return;
       }
 
-      toast.success(`Deleted ${selectedRows.length} rows from table "${selectedTable}"`);
+      toast.success(`Deleted ${selectedRows.length} rows from table "${selectedTable.table_name}"`);
       fetchTableData();
     }
   };
@@ -178,13 +184,13 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
   const handleDeleteColumn = async (columnName) => {
     const shouldDelete = confirm(`Are you sure you want to delete the column "${columnName}"?`);
     if (shouldDelete) {
-      const { error } = await tooljetDatabaseService.deleteColumn(organizationId, selectedTable, columnName);
+      const { error } = await tooljetDatabaseService.deleteColumn(organizationId, selectedTable.table_name, columnName);
       if (error) {
         toast.error(error?.message ?? `Error deleting column "${columnName}" from table "${selectedTable}"`);
         return;
       }
       await fetchTableMetadata();
-      toast.success(`Deleted ${columnName} from table "${selectedTable}"`);
+      toast.success(`Deleted ${columnName} from table "${selectedTable.table_name}"`);
     }
   };
 
@@ -231,7 +237,11 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
         >
           <thead>
             {headerGroups.map((headerGroup, index) => (
-              <tr className="tj-database-column-row" {...headerGroup.getHeaderGroupProps()} key={index}>
+              <tr
+                className="tj-database-column-row"
+                {...headerGroup.getHeaderGroupProps()}
+                key={index}
+              >
                 {headerGroup.headers.map((column, index) => (
                   <TablePopover
                     key={column.Header}
@@ -259,7 +269,10 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
               </tr>
             ))}
           </thead>
-          <button onClick={() => openCreateColumnDrawer()} className="add-row-btn-database">
+          <button
+            onClick={() => openCreateColumnDrawer()}
+            className="add-row-btn-database"
+          >
             +
           </button>
           <tbody
@@ -276,7 +289,10 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
                       <EmptyFoldersIllustration />
                     </div>
                     <div className="text-center">
-                      <div className="text-h3" data-cy="do-not-have-records-text">
+                      <div
+                        className="text-h3"
+                        data-cy="do-not-have-records-text"
+                      >
                         You don&apos;t have any records yet.
                       </div>
                     </div>
@@ -288,7 +304,10 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
                 prepareRow(row);
                 return (
                   <>
-                    <tr {...row.getRowProps()} key={index}>
+                    <tr
+                      {...row.getRowProps()}
+                      key={index}
+                    >
                       {row.cells.map((cell, index) => {
                         const dataCy =
                           cell.column.id === 'selection'
@@ -311,7 +330,10 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
                 );
               })
             )}
-            <button onClick={() => openCreateRowDrawer()} className="add-col-btn-database">
+            <button
+              onClick={() => openCreateRowDrawer()}
+              className="add-col-btn-database"
+            >
               +
             </button>
           </tbody>
@@ -324,7 +346,11 @@ const Table = ({ openCreateRowDrawer, openCreateColumnDrawer }) => {
           tableDataLength={tableData.length}
         />
       </div>
-      <Drawer isOpen={isEditColumnDrawerOpen} onClose={() => setIsEditColumnDrawerOpen(false)} position="right">
+      <Drawer
+        isOpen={isEditColumnDrawerOpen}
+        onClose={() => setIsEditColumnDrawerOpen(false)}
+        position="right"
+      >
         <EditColumnForm
           selectedColumn={selectedColumn}
           onEdit={() => {

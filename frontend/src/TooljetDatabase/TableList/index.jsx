@@ -27,10 +27,14 @@ const List = () => {
       return;
     }
 
-    if (Array.isArray(data?.result)) {
+    if (!isEmpty(data?.result)) {
       setTables(data.result || []);
-      setSelectedTable(data?.result[0]?.table_name);
-      updateSidebarNAV(data?.result[0]?.table_name);
+      setSelectedTable({ table_name: data.result[0].table_name, id: data.result[0].id });
+      updateSidebarNAV(data.result[0].table_name);
+    } else {
+      setTables([]);
+      setSelectedTable({});
+      updateSidebarNAV(null);
     }
   }
 
@@ -38,6 +42,12 @@ const List = () => {
     fetchTables();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const renamedTableList = tables.map((table) => (table.id === selectedTable.id ? selectedTable : table));
+    setTables(renamedTableList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTable]);
 
   let filteredTables = [...tables];
 
@@ -63,7 +73,11 @@ const List = () => {
               }}
               data-cy="create-new-folder-button"
             >
-              <SolidIcon name="search" width="14" fill={darkMode ? '#ECEDEE' : '#11181C'} />
+              <SolidIcon
+                name="search"
+                width="14"
+                fill={darkMode ? '#ECEDEE' : '#11181C'}
+              />
             </div>
           </>
         ) : (
@@ -76,16 +90,21 @@ const List = () => {
         )}
       </div>
       <div className="list-group mb-3">
-        {loading && <Skeleton count={3} height={22} />}
+        {loading && (
+          <Skeleton
+            count={3}
+            height={22}
+          />
+        )}
         {!loading &&
-          filteredTables?.map(({ table_name }, index) => (
+          filteredTables?.map(({ id, table_name }, index) => (
             <ListItem
               key={index}
-              active={table_name === selectedTable}
+              active={id === selectedTable.id}
               text={table_name}
               onDeleteCallback={fetchTables}
               onClick={() => {
-                setSelectedTable(table_name);
+                setSelectedTable({ table_name, id });
                 updateSidebarNAV(table_name);
               }}
             />
