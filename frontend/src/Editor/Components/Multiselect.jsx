@@ -32,6 +32,7 @@ export const Multiselect = function Multiselect({
   const { label, value, values, display_values, showAllOption } = properties;
   const { borderRadius, visibility, disabledState, boxShadow } = styles;
   const [selected, setSelected] = useState([]);
+  const [searched, setSearched] = useState('');
 
   const [checked, setChecked] = useState(false);
   React.useEffect(() => {
@@ -151,6 +152,20 @@ export const Multiselect = function Multiselect({
     [selected, setSelected]
   );
 
+  const filterOptions = (options, filter) => {
+    setSearched(filter);
+
+    if (searched !== filter) {
+      setExposedVariable('searchText', filter);
+      fireEvent('onSearchTextChanged');
+    }
+    if (!filter) return options;
+
+    return options.filter(
+      ({ label, value }) => label != null && value != null && label.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   return (
     <div
       className="multiselect-widget row g-0"
@@ -182,6 +197,8 @@ export const Multiselect = function Multiselect({
           disabled={disabledState}
           className={`multiselect-box${darkMode ? ' dark dark-multiselectinput' : ''}`}
           ItemRenderer={ItemRenderer}
+          filterOptions={filterOptions}
+          debounceDuration={0}
         />
       </div>
     </div>

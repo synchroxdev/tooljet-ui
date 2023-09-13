@@ -34,7 +34,7 @@ const RowForm = ({ onCreate, onClose }) => {
 
   const handleSubmit = async () => {
     setFetching(true);
-    const { error } = await tooljetDatabaseService.createRow(organizationId, selectedTable, data);
+    const { error } = await tooljetDatabaseService.createRow(organizationId, selectedTable.id, data);
     setFetching(false);
     if (error) {
       toast.error(error?.message ?? `Failed to create a new column table "${selectedTable}"`);
@@ -87,7 +87,10 @@ const RowForm = ({ onCreate, onClose }) => {
   return (
     <div className="drawer-card-wrapper ">
       <div className="card-header">
-        <h3 className="card-title" data-cy="create-new-row-header">
+        <h3
+          className="card-title"
+          data-cy="create-new-row-header"
+        >
           Create a new row
         </h3>
       </div>
@@ -95,7 +98,10 @@ const RowForm = ({ onCreate, onClose }) => {
         {Array.isArray(columns) &&
           columns?.map(({ Header, accessor, dataType, isPrimaryKey, column_default }, index) => {
             return (
-              <div className="mb-3" key={index}>
+              <div
+                className="mb-3"
+                key={index}
+              >
                 <div
                   className="form-label"
                   data-cy={`${String(Header).toLocaleLowerCase().replace(/\s+/g, '-')}-column-name-label`}
@@ -113,7 +119,11 @@ const RowForm = ({ onCreate, onClose }) => {
             );
           })}
       </div>
-      <DrawerFooter fetching={fetching} onClose={onClose} onCreate={handleSubmit} />
+      <DrawerFooter
+        fetching={fetching}
+        onClose={onClose}
+        onCreate={handleSubmit}
+      />
     </div>
   );
 };

@@ -50,7 +50,10 @@ export const FilterForm = ({ filters, setFilters, index, column = '', operator =
     <div className="row g-2 align-items-center">
       <div className="col-11">
         <div className="row g-2 align-items-center py-3">
-          <div className="col-4 select-column-field" data-cy="select-column-field">
+          <div
+            className="col-4 select-column-field"
+            data-cy="select-column-field"
+          >
             <Select
               useMenuPortal={false}
               placeholder="Select column"
@@ -60,7 +63,10 @@ export const FilterForm = ({ filters, setFilters, index, column = '', operator =
               customWrap={true}
             />
           </div>
-          <div className="col-4 select-operation-field" data-cy="select-operation-field">
+          <div
+            className="col-4 select-operation-field"
+            data-cy="select-operation-field"
+          >
             <Select
               placeholder="Select operation"
               useMenuPortal={false}
@@ -70,11 +76,11 @@ export const FilterForm = ({ filters, setFilters, index, column = '', operator =
               customWrap={true}
             />
           </div>
-          <div className="col-4 tj-app-input">
+          <div className="col-4">
             <input
               value={filterInputValue}
               type="text"
-              className="form-control"
+              className="form-control css-zz6spl-container"
               data-cy="value-input-field"
               placeholder="Value"
               onChange={(event) => {
@@ -84,8 +90,16 @@ export const FilterForm = ({ filters, setFilters, index, column = '', operator =
           </div>
         </div>
       </div>
-      <div className="col-1 cursor-pointer" data-cy="delete-icon" onClick={handleDelete}>
-        <SolidIcon name="trash" fill="#E54D2E" width="14" />
+      <div
+        className="col-1 cursor-pointer"
+        data-cy="delete-icon"
+        onClick={handleDelete}
+      >
+        <SolidIcon
+          name="trash"
+          fill="#E54D2E"
+          width="14"
+        />
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ export const TooljetDatabase = (props) => {
   const [columns, setColumns] = useState([]);
   const [tables, setTables] = useState([]);
   const [searchParam, setSearchParam] = useState('');
-  const [selectedTable, setSelectedTable] = useState('');
+  const [selectedTable, setSelectedTable] = useState({});
   const [selectedTableData, setSelectedTableData] = useState([]);
 
   const [totalRecords, setTotalRecords] = useState(0);
@@ -109,7 +109,10 @@ export const TooljetDatabase = (props) => {
   }, []);
 
   return (
-    <Layout switchDarkMode={props.switchDarkMode} darkMode={props.darkMode}>
+    <Layout
+      switchDarkMode={props.switchDarkMode}
+      darkMode={props.darkMode}
+    >
       <div className="page-wrapper tooljet-database">
         <TooljetDatabaseContext.Provider value={value}>
           <TooljetDatabasePage totalTables={tables.length || 0} />

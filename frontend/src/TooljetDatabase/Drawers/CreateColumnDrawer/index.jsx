@@ -16,16 +16,27 @@ const CreateColumnDrawer = ({ setIsCreateColumnDrawerOpen, isCreateColumnDrawerO
         className={`add-new-column-btn ghost-black-operation ${isCreateColumnDrawerOpen && 'open'}`}
         data-cy="add-new-column-button"
       >
-        <SolidIcon name="column" width="14" fill={isCreateColumnDrawerOpen ? '#3E63DD' : '#889096'} />
-        <span className=" tj-text-xsm font-weight-500" style={{ marginLeft: '6px' }}>
+        <SolidIcon
+          name="column"
+          width="14"
+          fill={isCreateColumnDrawerOpen ? '#3E63DD' : '#889096'}
+        />
+        <span
+          className=" tj-text-xsm font-weight-500"
+          style={{ marginLeft: '6px' }}
+        >
           Add new column
         </span>
       </button>
 
-      <Drawer isOpen={isCreateColumnDrawerOpen} onClose={() => setIsCreateColumnDrawerOpen(false)} position="right">
+      <Drawer
+        isOpen={isCreateColumnDrawerOpen}
+        onClose={() => setIsCreateColumnDrawerOpen(false)}
+        position="right"
+      >
         <CreateColumnForm
           onCreate={() => {
-            tooljetDatabaseService.viewTable(organizationId, selectedTable).then(({ data = [], error }) => {
+            tooljetDatabaseService.viewTable(organizationId, selectedTable.table_name).then(({ data = [], error }) => {
               if (error) {
                 toast.error(error?.message ?? `Error fetching columns for table "${selectedTable}"`);
                 return;
@@ -43,9 +54,9 @@ const CreateColumnDrawer = ({ setIsCreateColumnDrawerOpen, isCreateColumnDrawerO
                 );
               }
             });
-            tooljetDatabaseService.findOne(organizationId, selectedTable).then(({ data = [], error }) => {
+            tooljetDatabaseService.findOne(organizationId, selectedTable.id).then(({ data = [], error }) => {
               if (error) {
-                toast.error(error?.message ?? `Failed to fetch table "${selectedTable}"`);
+                toast.error(error?.message ?? `Failed to fetch table "${selectedTable.table_name}"`);
                 return;
               }
 

@@ -49,10 +49,10 @@ const EditRowForm = ({ onEdit, onClose }) => {
   const handleSubmit = async () => {
     setFetching(true);
     const query = `id=eq.${selectedRow}&order=id`;
-    const { error } = await tooljetDatabaseService.updateRows(organizationId, selectedTable, rowData, query);
+    const { error } = await tooljetDatabaseService.updateRows(organizationId, selectedTable.id, rowData, query);
 
     if (error) {
-      toast.error(error?.message ?? `Failed to create a new column table "${selectedTable}"`);
+      toast.error(error?.message ?? `Failed to create a new column table "${selectedTable.table_name}"`);
       return;
     }
     setFetching(false);
@@ -72,18 +72,27 @@ const EditRowForm = ({ onEdit, onClose }) => {
   return (
     <div className="">
       <div className="drawer-card-title">
-        <h3 className="card-title" data-cy="edit-row-header">
+        <h3
+          className="card-title"
+          data-cy="edit-row-header"
+        >
           Edit a row
         </h3>
       </div>
       <div className="card-body">
         <div>
           <div className="mb-3 row g-2 align-items-center">
-            <div className="col-2" data-cy={`${primaryColumn}-column-name-label`}>
+            <div
+              className="col-2"
+              data-cy={`${primaryColumn}-column-name-label`}
+            >
               {primaryColumn}&nbsp;
               <span className="badge badge-outline text-blue"> SERIAL</span>
             </div>
-            <div className="col-auto row-edit-select-container" data-cy="select-row-dropdown">
+            <div
+              className="col-auto row-edit-select-container"
+              data-cy="select-row-dropdown"
+            >
               <Select
                 useMenuPortal={false}
                 placeholder="Select a row to edit"
@@ -103,7 +112,10 @@ const EditRowForm = ({ onEdit, onClose }) => {
               if (isPrimaryKey) return null;
 
               return (
-                <div className="mb-3" key={index}>
+                <div
+                  className="mb-3"
+                  key={index}
+                >
                   <div
                     className="form-label"
                     data-cy={`${String(Header).toLocaleLowerCase().replace(/\s+/g, '-')}-column-name-label`}
@@ -130,7 +142,14 @@ const EditRowForm = ({ onEdit, onClose }) => {
             })}
         </div>
       </div>
-      {selectedRow && <DrawerFooter isEditMode={true} fetching={fetching} onClose={onClose} onEdit={handleSubmit} />}
+      {selectedRow && (
+        <DrawerFooter
+          isEditMode={true}
+          fetching={fetching}
+          onClose={onClose}
+          onEdit={handleSubmit}
+        />
+      )}
     </div>
   );
 };

@@ -69,7 +69,10 @@ export default function EditorHeader({
         <div className="container-xl header-container">
           <div className="d-flex w-100">
             <h1 className="navbar-brand d-none-navbar-horizontal pe-0 mt-1">
-              <Link to={'/'} data-cy="editor-page-logo">
+              <Link
+                to={'/'}
+                data-cy="editor-page-logo"
+              >
                 <AppLogo isLoadingFromHeader={true} />
               </Link>
             </h1>
@@ -88,8 +91,13 @@ export default function EditorHeader({
                       darkMode={darkMode}
                       toggleAppMaintenance={toggleAppMaintenance}
                       is_maintenance_on={is_maintenance_on}
+                      app={app}
                     />
-                    <EditAppName appId={app.id} appName={app.name} onNameChanged={onNameChanged} />
+                    <EditAppName
+                      appId={app.id}
+                      appName={app.name}
+                      onNameChanged={onNameChanged}
+                    />
                   </div>
 
                   <div className="col d-flex">
@@ -137,7 +145,12 @@ export default function EditorHeader({
               <div className="navbar-nav flex-row order-md-last release-buttons p-1">
                 <div className="nav-item me-1">
                   {app.id && (
-                    <ManageAppUsers app={app} slug={slug} darkMode={darkMode} handleSlugChange={handleSlugChange} />
+                    <ManageAppUsers
+                      app={app}
+                      slug={slug}
+                      darkMode={darkMode}
+                      handleSlugChange={handleSlugChange}
+                    />
                   )}
                 </div>
                 <div className="nav-item me-1">
@@ -156,7 +169,14 @@ export default function EditorHeader({
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <rect x="0.363281" y="0.220703" width="32" height="32" rx="6" fill="#F0F4FF" />
+                      <rect
+                        x="0.363281"
+                        y="0.220703"
+                        width="32"
+                        height="32"
+                        rx="6"
+                        fill="#F0F4FF"
+                      />
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"

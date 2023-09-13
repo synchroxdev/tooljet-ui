@@ -36,7 +36,7 @@ const ColumnForm = ({ onCreate, onClose }) => {
 
     const { error } = await tooljetDatabaseService.createColumn(
       organizationId,
-      selectedTable,
+      selectedTable.table_name,
       columnName,
       dataType,
       defaultValue
@@ -45,7 +45,7 @@ const ColumnForm = ({ onCreate, onClose }) => {
     setFetching(false);
 
     if (error) {
-      toast.error(error?.message ?? `Failed to create a new column in "${selectedTable}" table`);
+      toast.error(error?.message ?? `Failed to create a new column in "${selectedTable.table_name}" table`);
       return;
     }
 
@@ -56,13 +56,19 @@ const ColumnForm = ({ onCreate, onClose }) => {
   return (
     <div className="drawer-card-wrapper ">
       <div className="drawer-card-title ">
-        <h3 className="" data-cy="create-new-column-header">
+        <h3
+          className=""
+          data-cy="create-new-column-header"
+        >
           Create a new column
         </h3>
       </div>
       <div className="card-body">
         <div className="mb-3 tj-app-input">
-          <div className="form-label" data-cy="column-name-input-field-label">
+          <div
+            className="form-label"
+            data-cy="column-name-input-field-label"
+          >
             Column name
           </div>
           <input
@@ -76,8 +82,14 @@ const ColumnForm = ({ onCreate, onClose }) => {
             autoFocus
           />
         </div>
-        <div className="mb-3 data-type-dropdown-section" data-cy="data-type-dropdown-section">
-          <div className="form-label" data-cy="data-type-input-field-label">
+        <div
+          className="mb-3 data-type-dropdown-section"
+          data-cy="data-type-dropdown-section"
+        >
+          <div
+            className="form-label"
+            data-cy="data-type-input-field-label"
+          >
             Data type
           </div>
           <Select
@@ -90,7 +102,10 @@ const ColumnForm = ({ onCreate, onClose }) => {
           />
         </div>
         <div className="mb-3 tj-app-input">
-          <div className="form-label" data-cy="default-value-input-field-label">
+          <div
+            className="form-label"
+            data-cy="default-value-input-field-label"
+          >
             Default value
           </div>
           <input
@@ -105,7 +120,11 @@ const ColumnForm = ({ onCreate, onClose }) => {
           />
         </div>
       </div>
-      <DrawerFooter fetching={fetching} onClose={onClose} onCreate={handleCreate} />
+      <DrawerFooter
+        fetching={fetching}
+        onClose={onClose}
+        onCreate={handleCreate}
+      />
     </div>
   );
 };
