@@ -51,6 +51,7 @@ import { Map } from '../Components/Map/Map';
 import { QrScanner } from '../Components/QrScanner/QrScanner';
 import { StarRating } from './StarRating';
 import { Table } from './Table/Table';
+import { ConfirmDialog } from './ConfirmDialog';
 
 const MUIComponents = {
   Button,
@@ -106,6 +107,7 @@ const MUIComponents = {
   IconButton,
   Form,
   BoundedBox,
+  ConfirmDialog,
 };
 
 export default MUIComponents;

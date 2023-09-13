@@ -39,7 +39,8 @@ export function renderElement(
   if (
     componentConfig.component == 'DropDown' ||
     componentConfig.component == 'Form' ||
-    componentConfig.component == 'Listview'
+    componentConfig.component == 'Listview' ||
+    componentConfig.component == 'ConfirmDialog'
   ) {
     const paramTypeConfig = componentMeta[paramType] || {};
     const paramConfig = paramTypeConfig[param] || {};
