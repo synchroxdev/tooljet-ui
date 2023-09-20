@@ -1,3 +1,4 @@
+import { Alert } from './Alert';
 import { Button } from './Button';
 import { ButtonGroup } from './ButtonGroup';
 import { Calendar } from '../Components/Calendar';
@@ -53,6 +54,7 @@ import { StarRating } from './StarRating';
 import { Table } from './Table/Table';
 
 const MUIComponents = {
+  Alert,
   Button,
   Image,
   Text,
