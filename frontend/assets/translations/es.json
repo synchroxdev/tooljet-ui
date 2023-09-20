@@ -722,7 +722,9 @@
       "enablePagination": "Habilitar paginación",
       "renderOnlyActiveTab": "Renderizar solo pestaña activa",
       "listOfLabels": "Listado de etiquetas",
-      "showTheDownload": "Mostrar descarga"
+      "showTheDownload": "Mostrar descarga",
+      "severity": "Severidad",
+      "variant": "Variante"
     },
     "Table": {
       "displayName": "Tabla",
