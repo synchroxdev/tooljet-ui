@@ -201,12 +201,6 @@ export const customWidgets = [
           schema: { type: 'string' },
         },
       },
-    },
-    events: {
-      onClick: { displayName: 'On click' },
-      onHover: { displayName: 'On hover' },
-    },
-    styles: {
       variant: {
         type: 'select',
         displayName: 'Variant',
@@ -228,6 +222,11 @@ export const customWidgets = [
         },
       },
     },
+    events: {
+      onClick: { displayName: 'On click' },
+      onHover: { displayName: 'On hover' },
+    },
+    styles: {},
     exposedVariables: {
       buttonText: 'Button',
     },
@@ -260,11 +259,11 @@ export const customWidgets = [
       properties: {
         text: { value: `Este es un mensaje informativo - revísalo` },
         severity: { value: 'info' },
+        variant: { value: 'standard' },
       },
       events: [],
       styles: {
         visibility: { value: '{{true}}' },
-        variant: 'standard',
       },
     },
   },
