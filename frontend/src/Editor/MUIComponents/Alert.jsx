@@ -6,7 +6,7 @@ export const Alert = function Alert({ properties, styles, registerAction, setExp
   const [title, setTitle] = useState(() => computeText());
   const [text, setText] = useState(() => computeText());
   const [visibility, setVisibility] = useState(styles.visibility);
-  const [variant, setVariant] = useState(styles.variant);
+  const [variant, setVariant] = useState();
 
   useEffect(() => {
     if (visibility !== styles.visibility) setVisibility(styles.visibility);
@@ -14,14 +14,14 @@ export const Alert = function Alert({ properties, styles, registerAction, setExp
   }, [styles.visibility]);
 
   useEffect(() => {
-    if (variant !== styles.variant) setVariant(styles.variant);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [styles.variant]);
-
-  useEffect(() => {
     if (severity !== properties.severity) setSeverity(properties.severity);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [properties.severity]);
+
+  useEffect(() => {
+    if (variant !== properties.variant) setVariant(properties.variant);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [properties.variant]);
 
   useEffect(() => {
     setTitle(properties.title);
@@ -61,6 +61,8 @@ export const Alert = function Alert({ properties, styles, registerAction, setExp
     display: visibility ? 'flex' : 'none',
     boxShadow: styles.boxShadow,
   };
+
+  console.log('variant', variant);
 
   return (
     <div data-cy={dataCy}>
