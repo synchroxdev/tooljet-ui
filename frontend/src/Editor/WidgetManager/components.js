@@ -37,7 +37,10 @@ const combineProperties = (widget, universal, isArray = false) => {
   };
 };
 
-export const componentTypes = [...widgets, ...customWidgets].map((widget) => {
+export const componentTypes = [
+  ...widgets.filter((widget) => !customWidgets.find((customWidget) => customWidget.name === widget.name)),
+  ...customWidgets,
+].map((widget) => {
   return {
     ...combineProperties(widget, universalProps),
     definition: combineProperties(widget.definition, universalProps.definition, true),
