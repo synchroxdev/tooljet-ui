@@ -7,7 +7,7 @@ import { Checkbox } from '../Components/Checkbox';
 import { CircularProgressBar } from '../Components/CirularProgressbar';
 import { CodeEditor } from '../Components/CodeEditor';
 import { ColorPicker } from '../Components/ColorPicker';
-import { Container } from '../Components/Container';
+import { Container } from './Container';
 import { Datepicker } from '../Components/Datepicker';
 import { DaterangePicker } from '../Components/DaterangePicker';
 import { Divider } from '../Components/Divider';
