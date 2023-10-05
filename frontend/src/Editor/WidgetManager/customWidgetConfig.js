@@ -417,106 +417,110 @@ export const customWidgets = [
       },
     },
   },
-  {
-    name: 'Container',
-    displayName: 'Container',
-    description: 'Wrapper for multiple components',
-    defaultSize: {
-      width: 5,
-      height: 200,
-    },
-    component: 'Container',
-    others: {
-      showOnDesktop: { type: 'toggle', displayName: 'Show on desktop' },
-      showOnMobile: { type: 'toggle', displayName: 'Show on mobile' },
-    },
-    properties: {
-      showAsCard: {
-        type: 'toggle',
-        displayName: 'show as card',
-        validation: {
-          schema: { type: 'boolean' },
-        },
-      },
-      title: {
-        type: 'code',
-        displayName: 'card title',
-        conditionallyRender: {
-          key: 'showAsCard',
-          value: false,
-        },
-        validation: {
-          schema: { type: 'string' },
-        },
-      },
-      loadingState: {
-        type: 'toggle',
-        displayName: 'loading state',
-        validation: {
-          schema: { type: 'boolean' },
-        },
-      },
-    },
-    events: {},
-    styles: {
-      backgroundColor: {
-        type: 'color',
-        displayName: 'Background color',
-        validation: {
-          schema: { type: 'string' },
-        },
-      },
-      borderRadius: {
-        type: 'code',
-        displayName: 'Border Radius',
-        validation: {
-          schema: {
-            type: 'union',
-            schemas: [{ type: 'string' }, { type: 'number' }],
+  ...(config.UI_LIB === 'antd'
+    ? [
+        {
+          name: 'Container',
+          displayName: 'Container',
+          description: 'Wrapper for multiple components',
+          defaultSize: {
+            width: 5,
+            height: 200,
+          },
+          component: 'Container',
+          others: {
+            showOnDesktop: { type: 'toggle', displayName: 'Show on desktop' },
+            showOnMobile: { type: 'toggle', displayName: 'Show on mobile' },
+          },
+          properties: {
+            showAsCard: {
+              type: 'toggle',
+              displayName: 'show as card',
+              validation: {
+                schema: { type: 'boolean' },
+              },
+            },
+            title: {
+              type: 'code',
+              displayName: 'card title',
+              conditionallyRender: {
+                key: 'showAsCard',
+                value: false,
+              },
+              validation: {
+                schema: { type: 'string' },
+              },
+            },
+            loadingState: {
+              type: 'toggle',
+              displayName: 'loading state',
+              validation: {
+                schema: { type: 'boolean' },
+              },
+            },
+          },
+          events: {},
+          styles: {
+            backgroundColor: {
+              type: 'color',
+              displayName: 'Background color',
+              validation: {
+                schema: { type: 'string' },
+              },
+            },
+            borderRadius: {
+              type: 'code',
+              displayName: 'Border Radius',
+              validation: {
+                schema: {
+                  type: 'union',
+                  schemas: [{ type: 'string' }, { type: 'number' }],
+                },
+              },
+            },
+            borderColor: {
+              type: 'color',
+              displayName: 'Border color',
+              validation: {
+                schema: { type: 'string' },
+              },
+            },
+            visibility: {
+              type: 'toggle',
+              displayName: 'Visibility',
+              validation: {
+                schema: { type: 'boolean' },
+              },
+            },
+            disabledState: {
+              type: 'toggle',
+              displayName: 'Disable',
+              validation: {
+                schema: { type: 'boolean' },
+              },
+            },
+          },
+          exposedVariables: {},
+          definition: {
+            others: {
+              showOnDesktop: { value: '{{true}}' },
+              showOnMobile: { value: '{{false}}' },
+            },
+            properties: {
+              visible: { value: '{{true}}' },
+              showAsCard: { value: `{{false}}` },
+              loadingState: { value: `{{false}}` },
+            },
+            events: [],
+            styles: {
+              backgroundColor: { value: '#fff' },
+              borderRadius: { value: '0' },
+              borderColor: { value: '#fff' },
+              visibility: { value: '{{true}}' },
+              disabledState: { value: '{{false}}' },
+            },
           },
         },
-      },
-      borderColor: {
-        type: 'color',
-        displayName: 'Border color',
-        validation: {
-          schema: { type: 'string' },
-        },
-      },
-      visibility: {
-        type: 'toggle',
-        displayName: 'Visibility',
-        validation: {
-          schema: { type: 'boolean' },
-        },
-      },
-      disabledState: {
-        type: 'toggle',
-        displayName: 'Disable',
-        validation: {
-          schema: { type: 'boolean' },
-        },
-      },
-    },
-    exposedVariables: {},
-    definition: {
-      others: {
-        showOnDesktop: { value: '{{true}}' },
-        showOnMobile: { value: '{{false}}' },
-      },
-      properties: {
-        visible: { value: '{{true}}' },
-        showAsCard: { value: `{{false}}` },
-        loadingState: { value: `{{false}}` },
-      },
-      events: [],
-      styles: {
-        backgroundColor: { value: '#fff' },
-        borderRadius: { value: '0' },
-        borderColor: { value: '#fff' },
-        visibility: { value: '{{true}}' },
-        disabledState: { value: '{{false}}' },
-      },
-    },
-  },
+      ]
+    : []),
 ];
